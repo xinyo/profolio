@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, ChevronRight } from "lucide-react";
+
 import heroImg from "./assets/logo.webp";
 import "./App.css";
 
 function App() {
   const { t } = useTranslation();
   const [count, setCount] = useState(0);
+
+  const [isDark, setIsDark] = useState(() => {
+    const stored = localStorage.getItem("theme");
+    return stored !== null ? stored === "dark" : true;
+  });
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }, [isDark]);
 
   return (
     <>
@@ -23,13 +39,30 @@ function App() {
             </Trans>
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          {t("count_is", { count })}
-        </button>
+
+        <div className="button-group">
+          <Button
+            type="button"
+            size="lg"
+            onClick={() => setCount((count) => count + 1)}
+          >
+            {t("hero_primary_btn", { count })}
+            <ArrowRight />
+          </Button>
+          <Button type="button" variant="outline" size="lg">
+            {t("hero_secondary_btn")}
+            <ChevronRight />
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsDark((d) => !d)}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? "\u2600" : "\u2601"}
+          </Button>
+        </div>
       </section>
 
       <div className="ticks"></div>
