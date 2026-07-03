@@ -104,7 +104,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/apps/factory" element={<FactoryApp />} />
+        <Route path="/apps/factory/*" element={<FactoryApp />} />
       </Routes>
     </BrowserRouter>
   );

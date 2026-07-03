@@ -1,16 +1,7 @@
 import "./styles.css";
 import { useState } from "react";
-import { Link } from "react-router";
-import {
-  ArrowLeft,
-  CalendarClock,
-  ChevronLeft,
-  ChevronRight,
-  ClipboardList,
-  Factory,
-  LayoutDashboard,
-  Timer,
-} from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,16 +9,10 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-
-const navItems = [
-  { label: "Overview", icon: LayoutDashboard },
-  { label: "Production", icon: Factory },
-  { label: "Schedule", icon: CalendarClock },
-  { label: "Tasks", icon: ClipboardList },
-  { label: "Timers", icon: Timer },
-];
+import { FactoryNavigations } from "@/apps/factory/components/navigations";
 
 export function FactoryApp() {
+  const { t } = useTranslation();
   const [isPanelOpen, setIsPanelOpen] = useState(true);
 
   return (
@@ -40,7 +25,7 @@ export function FactoryApp() {
       >
         <div className="factory-sidepanel-top">
           <CollapsibleContent className="factory-sidepanel-title">
-            <span>Factory</span>
+            <span>{t("factory.title")}</span>
           </CollapsibleContent>
           <CollapsibleTrigger asChild>
             <Button
@@ -50,8 +35,8 @@ export function FactoryApp() {
               className="factory-panel-toggle"
               aria-label={
                 isPanelOpen
-                  ? "Collapse navigation panel"
-                  : "Expand navigation panel"
+                  ? t("factory.navigation.collapse")
+                  : t("factory.navigation.expand")
               }
             >
               {isPanelOpen ? <ChevronLeft /> : <ChevronRight />}
@@ -59,20 +44,11 @@ export function FactoryApp() {
           </CollapsibleTrigger>
         </div>
 
-        <nav className="factory-sidepanel-nav" aria-label="Factory navigation">
-          {navItems.map(({ label, icon: Icon }) => (
-            <button className="factory-nav-item" type="button" key={label}>
-              <Icon aria-hidden="true" />
-              <CollapsibleContent asChild>
-                <span>{label}</span>
-              </CollapsibleContent>
-            </button>
-          ))}
-        </nav>
+        <FactoryNavigations />
       </Collapsible>
 
       <section className="factory-app-workspace">
-        <header className="app-view-header">Factory</header>
+        <header className="app-view-header">{t("factory.title")}</header>
       </section>
     </main>
   );

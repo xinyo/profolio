@@ -81,11 +81,21 @@
   font: inherit;
   font-size: 0.9rem;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.factory-nav-item:hover {
+.factory-nav-item:hover,
+.factory-nav-item[aria-current="page"] {
   background: var(--muted);
+}
+
+.factory-nav-item[aria-current="page"] {
+  font-weight: 700;
+}
+
+.factory-nav-item[aria-current="page"] svg {
+  stroke-width: 2.5;
 }
 
 .factory-nav-item:focus-visible,

@@ -16,6 +16,21 @@
       }
     ]
   },
+  "factory": {
+    "title": "Factory",
+    "navigation": {
+      "label": "Factory navigation",
+      "collapse": "Collapse navigation panel",
+      "expand": "Expand navigation panel",
+      "items": {
+        "overview": "Overview",
+        "production": "Production",
+        "schedule": "Schedule",
+        "tasks": "Tasks",
+        "timers": "Timers"
+      }
+    }
+  },
   "operating_principles": {
     "title": "Operating Principles",
     "headline": "Great software feels inevitable.",
