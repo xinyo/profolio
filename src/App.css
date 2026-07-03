@@ -27,6 +27,38 @@
   }
 }
 
+.view-page {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  padding: 48px 24px;
+  box-sizing: border-box;
+}
+
+.view-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 780px;
+}
+
+.view-copy h1 {
+  margin: 0;
+}
+
+.view-copy p {
+  margin: 0;
+}
+
+.view-kicker {
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 #next-steps {
   display: flex;
   border-top: 1px solid var(--border);

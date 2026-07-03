@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
+import { BrowserRouter, Link, Route, Routes } from "react-router";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronRight } from "lucide-react";
+import { About } from "@/views/about";
+import { Explore } from "@/views/explore";
 
 import heroImg from "./assets/logo.webp";
 import "./App.css";
 
-function App() {
+function HomePage() {
   const { t } = useTranslation();
   const [count, setCount] = useState(0);
 
@@ -41,17 +44,17 @@ function App() {
         </div>
 
         <div className="button-group">
-          <Button
-            type="button"
-            size="lg"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            {t("hero_primary_btn", { count })}
-            <ArrowRight />
+          <Button asChild size="lg" onClick={() => setCount((count) => count + 1)}>
+            <Link to="/about">
+              {t("hero_primary_btn", { count })}
+              <ArrowRight />
+            </Link>
           </Button>
-          <Button type="button" variant="outline" size="lg">
-            {t("hero_secondary_btn")}
-            <ChevronRight />
+          <Button asChild variant="outline" size="lg">
+            <Link to="/explore">
+              {t("hero_secondary_btn")}
+              <ChevronRight />
+            </Link>
           </Button>
           <Button
             type="button"
@@ -67,6 +70,18 @@ function App() {
 
       <div className="ticks"></div>
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/explore" element={<Explore />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
