@@ -18,6 +18,14 @@
   },
   "factory": {
     "title": "Factory",
+    "views": {
+      "overview": {
+        "title": "Overview"
+      },
+      "production": {
+        "title": "Production"
+      }
+    },
     "navigation": {
       "label": "Factory navigation",
       "collapse": "Collapse navigation panel",
@@ -29,6 +37,15 @@
         "tasks": "Tasks",
         "timers": "Timers"
       }
+    },
+    "chat": {
+      "title": "AI chat",
+      "collapse": "Collapse AI chat panel",
+      "expand": "Expand AI chat panel",
+      "loading": "Preparing assistant",
+      "inputLabel": "Message AI assistant",
+      "inputPlaceholder": "Ask about this factory",
+      "send": "Send message"
     }
   },
   "operating_principles": {
