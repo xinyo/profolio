@@ -1,4 +1,9 @@
-import "./styles.css";
+import {
+  BotMessageSquare,
+  Menu,
+  PanelLeftClose,
+  PanelRightClose,
+} from "lucide-react";
 import {
   useEffect,
   useState,
@@ -7,23 +12,18 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
-import {
-  Menu,
-  BotMessageSquare,
-  PanelLeftClose,
-  PanelRightClose,
-} from "lucide-react";
+import "./styles.css";
 
+import { AiChat } from "@/apps/factory/components/ai-chat";
+import { FactoryNavigations } from "@/apps/factory/components/navigations";
+import { OverviewView } from "@/apps/factory/views/overview";
+import { ProductionView } from "@/apps/factory/views/production";
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { AiChat } from "@/apps/factory/components/ai-chat";
-import { FactoryNavigations } from "@/apps/factory/components/navigations";
-import { OverviewView } from "@/apps/factory/views/overview";
-import { ProductionView } from "@/apps/factory/views/production";
 
 const factoryViewTitles = [
   {
@@ -57,7 +57,7 @@ export function FactoryApp() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const [isPanelOpen, setIsPanelOpen] = useState(true);
-  const [isChatPanelOpen, setIsChatPanelOpen] = useState(true);
+  const [isChatPanelOpen, setIsChatPanelOpen] = useState(false);
   const [chatPanelWidth, setChatPanelWidth] = useState(CHAT_PANEL_MIN_WIDTH);
   const [isResizingChatPanel, setIsResizingChatPanel] = useState(false);
   const activeView = factoryViewTitles.find(({ path }) => pathname === path);
