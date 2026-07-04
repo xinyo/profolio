@@ -37,7 +37,21 @@ const factoryViewTitles = [
 ];
 
 const CHAT_PANEL_MIN_WIDTH = 300;
-const CHAT_PANEL_MAX_VIEWPORT_GUTTER = 96;
+
+function getChatPanelMaxWidth() {
+  if (window.innerWidth > 1920) {
+    return 800;
+  }
+
+  return window.innerWidth * 0.4;
+}
+
+function clampChatPanelWidth(width: number) {
+  return Math.min(
+    Math.max(width, CHAT_PANEL_MIN_WIDTH),
+    getChatPanelMaxWidth(),
+  );
+}
 
 export function FactoryApp() {
   const { t } = useTranslation();
@@ -58,15 +72,9 @@ export function FactoryApp() {
     }
 
     function handlePointerMove(event: globalThis.PointerEvent) {
-      const maxWidth = Math.max(
-        CHAT_PANEL_MIN_WIDTH,
-        window.innerWidth - CHAT_PANEL_MAX_VIEWPORT_GUTTER,
-      );
       const nextWidth = window.innerWidth - event.clientX;
 
-      setChatPanelWidth(
-        Math.min(Math.max(nextWidth, CHAT_PANEL_MIN_WIDTH), maxWidth),
-      );
+      setChatPanelWidth(clampChatPanelWidth(nextWidth));
     }
 
     function handlePointerUp() {
@@ -85,6 +93,16 @@ export function FactoryApp() {
       document.body.classList.remove("factory-chat-resizing");
     };
   }, [isResizingChatPanel]);
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setChatPanelWidth((width) => clampChatPanelWidth(width));
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
 
   function handleChatResizeStart(event: PointerEvent<HTMLDivElement>) {
     event.preventDefault();

@@ -182,10 +182,17 @@
   flex-direction: column;
   width: var(--factory-chat-panel-width);
   min-width: 300px;
+  max-width: 50vw;
   height: 100vh;
   overflow: hidden;
   border-left: 1px solid var(--border);
   background: var(--background);
+}
+
+@media (width > 1920px) {
+  .factory-chat-panel {
+    max-width: 800px;
+  }
 }
 
 .factory-chat-resize-handle {
