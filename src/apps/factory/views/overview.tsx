@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import * as React from "react";
+import { useState } from "react";
 
 import {
   Card,
@@ -135,7 +135,7 @@ const chartConfig = {
 
 export function OverviewView() {
   const { t } = useTranslation();
-  const [timeRange, setTimeRange] = React.useState("90d");
+  const [timeRange, setTimeRange] = useState("90d");
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
