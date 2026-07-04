@@ -17,6 +17,13 @@
   --factory-chat-workspace-offset: 0px;
 }
 
+.factory-app-page button[data-variant="ghost"][aria-expanded="true"] {
+  background-color: transparent;
+  &:hover {
+    background-color: var(--muted);
+  }
+}
+
 .factory-sidepanel {
   position: fixed;
   inset: 0 auto 0 0;
