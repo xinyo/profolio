@@ -1,4 +1,22 @@
 .factory-app-page {
+  --factory-primary: #190041;
+  --factory-on-primary: #ffffff;
+  --factory-primary-hover: #2b0a6a;
+  --factory-secondary: #7550e8;
+  --factory-ink: #1c1830;
+  --factory-ink-muted: #625d75;
+  --factory-canvas: #fdfdff;
+  --factory-surface-1: #f7f5fc;
+  --factory-surface-2: #f1ecfa;
+  --factory-border: #938aae;
+  --factory-dark-bg: #14111f;
+  --factory-dark-surface: #1d1930;
+  --factory-dark-border: #6d6780;
+  --factory-dark-ink: #eae7f5;
+  --factory-success: #067647;
+  --factory-danger: #b42318;
+  --factory-warning: #9a6700;
+
   background: var(--bg);
   min-height: 100vh;
   color: var(--foreground);
@@ -115,13 +133,13 @@
 .factory-sidepanel [data-slot="button"]:focus-visible {
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px #f6821f;
+  box-shadow: 0 0 0 4px var(--factory-primary);
 }
 
 .factory-nav-item svg {
   width: 1rem;
   height: 1rem;
-  color: #f6821f;
+  color: var(--factory-primary);
 }
 
 .factory-nav-item span {
@@ -222,7 +240,7 @@
 .factory-chat-resize-handle:hover::after,
 .factory-chat-resize-handle:focus-visible::after,
 .factory-chat-resizing .factory-chat-resize-handle::after {
-  background: #f6821f;
+  background: var(--factory-primary);
 }
 
 .factory-chat-resize-handle:focus-visible {
@@ -254,7 +272,7 @@
 .factory-chat-panel-header svg {
   width: 1rem;
   height: 1rem;
-  color: #f6821f;
+  color: var(--factory-primary);
 }
 
 .factory-ai-chat {
@@ -278,7 +296,7 @@
 .factory-ai-chat-loading svg:first-child {
   width: 1.5rem;
   height: 1.5rem;
-  color: #f6821f;
+  color: var(--factory-primary);
   animation: factory-chat-spin 900ms linear infinite;
 }
 
@@ -319,9 +337,9 @@
 }
 
 .factory-chat-message[data-role="user"] .factory-chat-bubble {
-  border-color: #f6821f;
-  background: #f6821f;
-  color: #ffffff;
+  border-color: var(--factory-primary);
+  background: var(--factory-primary);
+  color: var(--factory-on-primary);
 }
 
 .factory-chat-input {
@@ -347,7 +365,7 @@
 .factory-chat-input input:focus-visible {
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px #f6821f;
+  box-shadow: 0 0 0 4px var(--factory-primary);
 }
 
 @keyframes factory-chat-spin {
