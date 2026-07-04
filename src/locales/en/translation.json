@@ -39,7 +39,7 @@
       }
     },
     "chat": {
-      "title": "AI chat",
+      "title": "Factory AI",
       "collapse": "Collapse AI chat panel",
       "expand": "Expand AI chat panel",
       "loading": "Preparing assistant",
