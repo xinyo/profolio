@@ -45,7 +45,8 @@
       "loading": "Preparing assistant",
       "inputLabel": "Message AI assistant",
       "inputPlaceholder": "Ask about this factory",
-      "send": "Send message"
+      "send": "Send message",
+      "resize": "Resize AI chat panel"
     }
   },
   "operating_principles": {

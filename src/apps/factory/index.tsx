@@ -1,5 +1,10 @@
 import "./styles.css";
-import { useState } from "react";
+import {
+  useEffect,
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import {
@@ -31,18 +36,66 @@ const factoryViewTitles = [
   },
 ];
 
+const CHAT_PANEL_MIN_WIDTH = 300;
+const CHAT_PANEL_MAX_VIEWPORT_GUTTER = 96;
+
 export function FactoryApp() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [isChatPanelOpen, setIsChatPanelOpen] = useState(true);
+  const [chatPanelWidth, setChatPanelWidth] = useState(CHAT_PANEL_MIN_WIDTH);
+  const [isResizingChatPanel, setIsResizingChatPanel] = useState(false);
   const activeView = factoryViewTitles.find(({ path }) => pathname === path);
   const viewTitle = t(activeView?.titleKey ?? "factory.views.overview.title");
+  const pageStyle = {
+    "--factory-chat-panel-width": `${chatPanelWidth}px`,
+  } as CSSProperties;
+
+  useEffect(() => {
+    if (!isResizingChatPanel) {
+      return;
+    }
+
+    function handlePointerMove(event: globalThis.PointerEvent) {
+      const maxWidth = Math.max(
+        CHAT_PANEL_MIN_WIDTH,
+        window.innerWidth - CHAT_PANEL_MAX_VIEWPORT_GUTTER,
+      );
+      const nextWidth = window.innerWidth - event.clientX;
+
+      setChatPanelWidth(
+        Math.min(Math.max(nextWidth, CHAT_PANEL_MIN_WIDTH), maxWidth),
+      );
+    }
+
+    function handlePointerUp() {
+      setIsResizingChatPanel(false);
+    }
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+    window.addEventListener("pointercancel", handlePointerUp);
+    document.body.classList.add("factory-chat-resizing");
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointercancel", handlePointerUp);
+      document.body.classList.remove("factory-chat-resizing");
+    };
+  }, [isResizingChatPanel]);
+
+  function handleChatResizeStart(event: PointerEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setIsResizingChatPanel(true);
+  }
 
   return (
     <main
       className="factory-app-page"
       data-chat-state={isChatPanelOpen ? "open" : "closed"}
+      style={pageStyle}
     >
       <Collapsible
         open={isPanelOpen}
@@ -102,12 +155,25 @@ export function FactoryApp() {
             <Routes>
               <Route index element={<OverviewView />} />
               <Route path="production" element={<ProductionView />} />
-              <Route path="*" element={<Navigate to="/apps/factory" replace />} />
+              <Route
+                path="*"
+                element={<Navigate to="/apps/factory" replace />}
+              />
             </Routes>
           </div>
         </section>
 
         <CollapsibleContent className="factory-chat-panel">
+          <div
+            className="factory-chat-resize-handle"
+            role="separator"
+            aria-label={t("factory.chat.resize")}
+            aria-orientation="vertical"
+            aria-valuemin={CHAT_PANEL_MIN_WIDTH}
+            aria-valuenow={chatPanelWidth}
+            tabIndex={0}
+            onPointerDown={handleChatResizeStart}
+          />
           <div className="factory-chat-panel-header">
             <BotMessageSquare aria-hidden="true" />
             <span>{t("factory.chat.title")}</span>
