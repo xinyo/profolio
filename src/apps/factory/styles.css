@@ -599,3 +599,13 @@
 .factory-search-input {
   padding-left: 2.125rem;
 }
+
+.factory-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.factory-product-list [data-slot="item"] [data-slot="item-media"] {
+  border-radius: var(--radius-md);
+}

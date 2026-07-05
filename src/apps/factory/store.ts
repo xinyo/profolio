@@ -15,6 +15,28 @@ export const companyNameMap = new Map<string, string>([
   ["precision-parts", "Precision Parts Ltd."],
 ]);
 
+export type FactoryProduct = {
+  id: string;
+  name: string;
+  code: string;
+  image: string;
+};
+
+export type FactoryCategory = {
+  id: string;
+  name: string;
+};
+
+export type FactoryProductKit = {
+  id: string;
+  name: string;
+  productIds: string[];
+};
+
+export const factoryProducts: FactoryProduct[] = mockData.products;
+export const factoryCategories: FactoryCategory[] = mockData.categories;
+export const factoryProductKits: FactoryProductKit[] = mockData.productKits;
+
 type FactoryStore = {
   language: FactoryLanguage;
   timezone: FactoryTimezone;

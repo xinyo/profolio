@@ -32,8 +32,11 @@
         "searchPlaceholder": "Search products...",
         "filterByLabel": "Filter by label",
         "allLabels": "All labels",
+        "filterByCategory": "All categories",
         "cancel": "Cancel",
-        "save": "Save"
+        "save": "Save",
+        "duplicate": "Duplicate",
+        "delete": "Delete"
       },
       "materials": {
         "title": "Materials"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ChevronDown, Plus, Search } from "lucide-react";
+import { ChevronDown, EllipsisVertical, Plus, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,9 +17,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 import { ProductDialog } from "@/apps/factory/dialogs/product-dialog";
 import { CategoryDialog } from "@/apps/factory/dialogs/category-dialog";
 import { ProductKitDialog } from "@/apps/factory/dialogs/product-kit-dialog";
+import {
+  factoryProducts,
+  factoryCategories,
+  type FactoryProduct,
+} from "@/apps/factory/store";
 
 export function ProductCategoriesView() {
   const { t } = useTranslation();
@@ -87,7 +99,32 @@ export function ProductCategoriesView() {
               <SelectItem value="label-c">Label C</SelectItem>
             </SelectContent>
           </Select>
+          <Select>
+            <SelectTrigger className="w-[200px]">
+              <SelectValue
+                placeholder={t(
+                  "factory.views.productCategories.filterByCategory",
+                )}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">
+                {t("factory.views.productCategories.filterByCategory")}
+              </SelectItem>
+              {factoryCategories.map((cat) => (
+                <SelectItem key={cat.id} value={cat.id}>
+                  {cat.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
+      </div>
+
+      <div className="factory-product-list">
+        {factoryProducts.map((product: FactoryProduct) => (
+          <ProductItem key={product.id} product={product} t={t} />
+        ))}
       </div>
 
       <ProductDialog
@@ -103,5 +140,40 @@ export function ProductCategoriesView() {
         onOpenChange={setProductKitDialogOpen}
       />
     </section>
+  );
+}
+
+function ProductItem({
+  product,
+  t,
+}: {
+  product: FactoryProduct;
+  t: (key: string) => string;
+}) {
+  return (
+    <Item variant="outline" size="default">
+      <ItemMedia variant="image">
+        <img src={product.image} alt={product.name} />
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>{product.name}</ItemTitle>
+        <ItemDescription>{product.code}</ItemDescription>
+      </ItemContent>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon-sm" aria-label="More options">
+            <EllipsisVertical className="size-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>
+            {t("factory.views.productCategories.duplicate")}
+          </DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">
+            {t("factory.views.productCategories.delete")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </Item>
   );
 }
