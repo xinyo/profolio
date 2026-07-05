@@ -18,7 +18,17 @@ import logo from "./assets/logo.png";
 import { AiChat } from "@/apps/factory/components/ai-chat";
 import { FactoryNavigations } from "@/apps/factory/components/navigations";
 import { OverviewView } from "@/apps/factory/views/overview";
-import { ProductsView } from "@/apps/factory/views/products";
+import { ProductCategoriesView } from "@/apps/factory/views/product-categories";
+import { MaterialsView } from "@/apps/factory/views/materials";
+import { SalesOrdersView } from "@/apps/factory/views/sales-orders";
+import { CustomersView } from "@/apps/factory/views/customers";
+import { PriceLevelManagerView } from "@/apps/factory/views/price-level-manager";
+import { PurchaseOrdersView } from "@/apps/factory/views/purchase-orders";
+import { SuppliersView } from "@/apps/factory/views/suppliers";
+import { WorkflowView } from "@/apps/factory/views/workflow";
+import { PlannersView } from "@/apps/factory/views/planners";
+import { DeliverySchedulingView } from "@/apps/factory/views/delivery-scheduling";
+import { TimesheetsView } from "@/apps/factory/views/timesheets";
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
@@ -29,8 +39,48 @@ import { useFactoryStore } from "@/apps/factory/store";
 
 const factoryViewTitles = [
   {
-    path: "/apps/factory/products",
-    titleKey: "factory.views.products.title",
+    path: "/apps/factory/product-categories",
+    titleKey: "factory.views.productCategories.title",
+  },
+  {
+    path: "/apps/factory/materials",
+    titleKey: "factory.views.materials.title",
+  },
+  {
+    path: "/apps/factory/sales-orders",
+    titleKey: "factory.views.salesOrders.title",
+  },
+  {
+    path: "/apps/factory/customers",
+    titleKey: "factory.views.customers.title",
+  },
+  {
+    path: "/apps/factory/price-level-manager",
+    titleKey: "factory.views.priceLevelManager.title",
+  },
+  {
+    path: "/apps/factory/purchase-orders",
+    titleKey: "factory.views.purchaseOrders.title",
+  },
+  {
+    path: "/apps/factory/suppliers",
+    titleKey: "factory.views.suppliers.title",
+  },
+  {
+    path: "/apps/factory/workflow",
+    titleKey: "factory.views.workflow.title",
+  },
+  {
+    path: "/apps/factory/planners",
+    titleKey: "factory.views.planners.title",
+  },
+  {
+    path: "/apps/factory/delivery-scheduling",
+    titleKey: "factory.views.deliveryScheduling.title",
+  },
+  {
+    path: "/apps/factory/timesheets",
+    titleKey: "factory.views.timesheets.title",
   },
   {
     path: "/apps/factory",
@@ -182,7 +232,26 @@ export function FactoryApp() {
           <div className="app-view-content">
             <Routes>
               <Route index element={<OverviewView />} />
-              <Route path="products" element={<ProductsView />} />
+              <Route
+                path="product-categories"
+                element={<ProductCategoriesView />}
+              />
+              <Route path="materials" element={<MaterialsView />} />
+              <Route path="sales-orders" element={<SalesOrdersView />} />
+              <Route path="customers" element={<CustomersView />} />
+              <Route
+                path="price-level-manager"
+                element={<PriceLevelManagerView />}
+              />
+              <Route path="purchase-orders" element={<PurchaseOrdersView />} />
+              <Route path="suppliers" element={<SuppliersView />} />
+              <Route path="workflow" element={<WorkflowView />} />
+              <Route path="planners" element={<PlannersView />} />
+              <Route
+                path="delivery-scheduling"
+                element={<DeliverySchedulingView />}
+              />
+              <Route path="timesheets" element={<TimesheetsView />} />
               <Route
                 path="*"
                 element={<Navigate to="/apps/factory" replace />}

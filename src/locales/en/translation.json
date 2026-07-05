@@ -22,8 +22,38 @@
       "overview": {
         "title": "Overview"
       },
-      "products": {
-        "title": "Products"
+      "productCategories": {
+        "title": "Product Categories"
+      },
+      "materials": {
+        "title": "Materials"
+      },
+      "salesOrders": {
+        "title": "Sales Orders"
+      },
+      "customers": {
+        "title": "Customers"
+      },
+      "priceLevelManager": {
+        "title": "Price Level Manager"
+      },
+      "purchaseOrders": {
+        "title": "Purchase Orders"
+      },
+      "suppliers": {
+        "title": "Suppliers"
+      },
+      "workflow": {
+        "title": "Workflow"
+      },
+      "planners": {
+        "title": "Planners"
+      },
+      "deliveryScheduling": {
+        "title": "Delivery Scheduling"
+      },
+      "timesheets": {
+        "title": "Timesheets"
       }
     },
     "navigation": {
@@ -31,12 +61,26 @@
       "label": "Factory navigation",
       "collapse": "Collapse navigation panel",
       "expand": "Expand navigation panel",
+      "sections": {
+        "general": "General",
+        "products": "Products",
+        "sales": "Sales",
+        "purchasing": "Purchasing",
+        "productivity": "Productivity"
+      },
       "items": {
         "overview": "Overview",
-        "products": "Products",
-        "schedule": "Schedule",
-        "tasks": "Tasks",
-        "timers": "Timers"
+        "productCategories": "Product Categories",
+        "materials": "Materials",
+        "salesOrders": "Sales Orders",
+        "customers": "Customers",
+        "priceLevelManager": "Price Level Manager",
+        "purchaseOrders": "Purchase Orders",
+        "suppliers": "Suppliers",
+        "workflow": "Workflow",
+        "planners": "Planners",
+        "deliveryScheduling": "Delivery Scheduling",
+        "timesheets": "Timesheets"
       }
     },
     "chat": {

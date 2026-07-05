@@ -1,24 +1,31 @@
 import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import {
+  Boxes,
+  Building2,
   CalendarClock,
-  ClipboardList,
+  CalendarDays,
+  Clock,
   CreditCard,
-  Factory,
+  DollarSign,
   HelpCircleIcon,
   KeyboardIcon,
   Languages,
   LayoutDashboard,
+  LayoutGrid,
   LogOut,
   Monitor,
   Moon,
   Palette,
+  ReceiptText,
   Search,
   Settings,
   Sparkles,
   Sun,
-  Timer,
+  Truck,
   User,
+  Users,
+  Workflow,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -49,32 +56,102 @@ import {
   type FactoryTimezone,
 } from "@/apps/factory/store";
 
-const navigationItems = [
+interface NavSection {
+  labelKey: string;
+  items: {
+    labelKey: string;
+    to: string;
+    icon: React.ComponentType<{ "aria-hidden"?: boolean | "true" }>;
+    end?: boolean;
+  }[];
+}
+
+const navigationSections: NavSection[] = [
   {
-    labelKey: "factory.navigation.items.overview",
-    to: "/apps/factory",
-    icon: LayoutDashboard,
-    end: true,
+    labelKey: "factory.navigation.sections.general",
+    items: [
+      {
+        labelKey: "factory.navigation.items.overview",
+        to: "/apps/factory",
+        icon: LayoutDashboard,
+        end: true,
+      },
+    ],
   },
   {
-    labelKey: "factory.navigation.items.products",
-    to: "/apps/factory/products",
-    icon: Factory,
+    labelKey: "factory.navigation.sections.products",
+    items: [
+      {
+        labelKey: "factory.navigation.items.productCategories",
+        to: "/apps/factory/product-categories",
+        icon: LayoutGrid,
+      },
+      {
+        labelKey: "factory.navigation.items.materials",
+        to: "/apps/factory/materials",
+        icon: Boxes,
+      },
+    ],
   },
   {
-    labelKey: "factory.navigation.items.schedule",
-    to: "/apps/factory/schedule",
-    icon: CalendarClock,
+    labelKey: "factory.navigation.sections.sales",
+    items: [
+      {
+        labelKey: "factory.navigation.items.salesOrders",
+        to: "/apps/factory/sales-orders",
+        icon: ReceiptText,
+      },
+      {
+        labelKey: "factory.navigation.items.customers",
+        to: "/apps/factory/customers",
+        icon: Users,
+      },
+      {
+        labelKey: "factory.navigation.items.priceLevelManager",
+        to: "/apps/factory/price-level-manager",
+        icon: DollarSign,
+      },
+    ],
   },
   {
-    labelKey: "factory.navigation.items.tasks",
-    to: "/apps/factory/tasks",
-    icon: ClipboardList,
+    labelKey: "factory.navigation.sections.purchasing",
+    items: [
+      {
+        labelKey: "factory.navigation.items.purchaseOrders",
+        to: "/apps/factory/purchase-orders",
+        icon: ReceiptText,
+      },
+      {
+        labelKey: "factory.navigation.items.suppliers",
+        to: "/apps/factory/suppliers",
+        icon: Building2,
+      },
+    ],
   },
   {
-    labelKey: "factory.navigation.items.timers",
-    to: "/apps/factory/timers",
-    icon: Timer,
+    labelKey: "factory.navigation.sections.productivity",
+    items: [
+      {
+        labelKey: "factory.navigation.items.workflow",
+        to: "/apps/factory/workflow",
+        icon: Workflow,
+      },
+      {
+        labelKey: "factory.navigation.items.planners",
+        to: "/apps/factory/planners",
+        icon: CalendarDays,
+      },
+      {
+        labelKey: "factory.navigation.items.deliveryScheduling",
+        to: "/apps/factory/delivery-scheduling",
+        icon: Truck,
+      },
+      {
+        labelKey: "factory.navigation.items.timesheets",
+        to: "/apps/factory/timesheets",
+        icon: Clock,
+      },
+    ],
   },
 ];
 
@@ -119,24 +196,31 @@ export function FactoryNavigations() {
             </span>
           </Button>
         </SearchDialog>
-        {navigationItems.map(({ labelKey, to, icon: Icon, end }) => {
-          const label = t(labelKey);
+        {navigationSections.map((section) => (
+          <div className="factory-nav-section" key={section.labelKey}>
+            <CollapsibleContent asChild>
+              <p className="factory-nav-section-label">{t(section.labelKey)}</p>
+            </CollapsibleContent>
+            {section.items.map(({ labelKey, to, icon: Icon, end }) => {
+              const label = t(labelKey);
 
-          return (
-            <NavLink
-              className="factory-nav-item"
-              to={to}
-              end={end}
-              title={label}
-              key={labelKey}
-            >
-              <Icon aria-hidden="true" />
-              <CollapsibleContent asChild>
-                <span>{label}</span>
-              </CollapsibleContent>
-            </NavLink>
-          );
-        })}
+              return (
+                <NavLink
+                  className="factory-nav-item"
+                  to={to}
+                  end={end}
+                  title={label}
+                  key={labelKey}
+                >
+                  <Icon aria-hidden="true" />
+                  <CollapsibleContent asChild>
+                    <span>{label}</span>
+                  </CollapsibleContent>
+                </NavLink>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       <footer className="factory-sidepanel-footer">
