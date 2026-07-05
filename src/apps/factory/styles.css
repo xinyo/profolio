@@ -1,6 +1,7 @@
 @import "./shadcn-theme.css";
 
 .factory-app-page {
+
   background: var(--background);
   min-height: 100vh;
   color: var(--foreground);
@@ -9,6 +10,10 @@
   --panel-width: var(--panel-open-width);
   --chat-panel-width: 300px;
   --chat-workspace-offset: var(--chat-panel-width);
+  color-scheme: light;
+  &[data-theme="dark"], html.dark & {
+    color-scheme: dark;
+  }
 }
 
 .factory-app-page:has(.factory-sidepanel[data-state="closed"]) {
@@ -27,6 +32,8 @@
 }
 
 .factory-sidepanel {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 20;
@@ -84,10 +91,23 @@
 }
 
 .factory-sidepanel-nav {
+  flex: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding: 0.75rem 0.75rem 5rem;
+  padding: 0.75rem 0.75rem;
+  scrollbar-width: thin;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - 48px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - 48px),
+    transparent 100%
+  );
 }
 
 .factory-nav-section {
@@ -205,10 +225,7 @@
 }
 
 .factory-sidepanel-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  flex-shrink: 0;
   padding: 0.75rem;
   border-top: 1px solid var(--border);
   background: var(--background);
