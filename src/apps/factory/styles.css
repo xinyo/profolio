@@ -542,3 +542,60 @@
     animation: none;
   }
 }
+
+/* ---- Product Categories: header & toolbar ---- */
+
+.factory-view-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.factory-view-header-start {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.factory-view-subtitle {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.factory-view-toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.factory-view-toolbar-start {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.factory-search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 260px;
+}
+
+.factory-search-input-icon {
+  position: absolute;
+  left: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.factory-search-input {
+  padding-left: 2.125rem;
+}

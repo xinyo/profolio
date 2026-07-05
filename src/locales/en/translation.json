@@ -23,7 +23,17 @@
         "title": "Overview"
       },
       "productCategories": {
-        "title": "Product Categories"
+        "title": "Product Categories",
+        "subtitle": "Organize and manage your products, categories, and kits in one place.",
+        "addNew": "Add new",
+        "addProduct": "Add Product",
+        "addCategory": "Add Category",
+        "addProductKit": "Add Product Kit",
+        "searchPlaceholder": "Search products...",
+        "filterByLabel": "Filter by label",
+        "allLabels": "All labels",
+        "cancel": "Cancel",
+        "save": "Save"
       },
       "materials": {
         "title": "Materials"
