@@ -25,13 +25,18 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
+  & [data-theme="dark"], &.dark  {
+    color-scheme: dark;
+  }
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
 
   @media (max-width: 1024px) {
     font-size: 16px;
@@ -107,6 +112,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  scrollbar-width: thin;
 }
 
 h1 {

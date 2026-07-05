@@ -10,10 +10,6 @@
   --panel-width: var(--panel-open-width);
   --chat-panel-width: 300px;
   --chat-workspace-offset: var(--chat-panel-width);
-  color-scheme: light;
-  &[data-theme="dark"], html.dark & {
-    color-scheme: dark;
-  }
 }
 
 .factory-app-page:has(.factory-sidepanel[data-state="closed"]) {
