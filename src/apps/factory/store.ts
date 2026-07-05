@@ -8,13 +8,22 @@ export const factoryTimezoneOptions = ["UTC", "Local"] as const;
 export type FactoryLanguage = (typeof factoryLanguageOptions)[number];
 export type FactoryTimezone = (typeof factoryTimezoneOptions)[number];
 
+export const companyNameMap = new Map<string, string>([
+  ["acme-corp", "Acme Corporation"],
+  ["tech-solutions", "Tech Solutions Inc."],
+  ["global-manufacturing", "Global Manufacturing Co."],
+  ["precision-parts", "Precision Parts Ltd."],
+]);
+
 type FactoryStore = {
   language: FactoryLanguage;
   timezone: FactoryTimezone;
   isNavPanelOpen: boolean;
+  currentCompany: string;
   setLanguage: (language: FactoryLanguage) => void;
   setTimezone: (timezone: FactoryTimezone) => void;
   setIsNavPanelOpen: (isOpen: boolean) => void;
+  setCurrentCompany: (company: string) => void;
 };
 
 function getInitialLanguage(): FactoryLanguage {
@@ -33,11 +42,16 @@ function getInitialTimezone(): FactoryTimezone {
     : "Local";
 }
 
-export const useFactoryStore = create<FactoryStore>((set) => ({
-  language: getInitialLanguage(),
-  timezone: getInitialTimezone(),
-  isNavPanelOpen: true,
-  setLanguage: (language) => set({ language }),
-  setTimezone: (timezone) => set({ timezone }),
-  setIsNavPanelOpen: (isNavPanelOpen) => set({ isNavPanelOpen }),
-}));
+export const useFactoryStore = create<FactoryStore>((set) => {
+  const initialCompany = Array.from(companyNameMap.keys())[0] || "acme-corp";
+  return {
+    language: getInitialLanguage(),
+    timezone: getInitialTimezone(),
+    isNavPanelOpen: true,
+    currentCompany: initialCompany,
+    setLanguage: (language) => set({ language }),
+    setTimezone: (timezone) => set({ timezone }),
+    setIsNavPanelOpen: (isNavPanelOpen) => set({ isNavPanelOpen }),
+    setCurrentCompany: (currentCompany) => set({ currentCompany }),
+  };
+});

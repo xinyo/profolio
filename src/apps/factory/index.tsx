@@ -35,7 +35,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useFactoryStore } from "@/apps/factory/store";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useFactoryStore, companyNameMap } from "@/apps/factory/store";
 
 const factoryViewTitles = [
   {
@@ -110,6 +117,8 @@ export function FactoryApp() {
   const { pathname } = useLocation();
   const isNavPanelOpen = useFactoryStore((state) => state.isNavPanelOpen);
   const setIsNavPanelOpen = useFactoryStore((state) => state.setIsNavPanelOpen);
+  const currentCompany = useFactoryStore((state) => state.currentCompany);
+  const setCurrentCompany = useFactoryStore((state) => state.setCurrentCompany);
   const [isChatPanelOpen, setIsChatPanelOpen] = useState(false);
   const [chatPanelWidth, setChatPanelWidth] = useState(CHAT_PANEL_MIN_WIDTH);
   const [isResizingChatPanel, setIsResizingChatPanel] = useState(false);
@@ -212,7 +221,18 @@ export function FactoryApp() {
       >
         <section className="factory-app-workspace">
           <header className="app-view-header">
-            <span>{viewTitle}</span>
+            <Select value={currentCompany} onValueChange={setCurrentCompany}>
+              <SelectTrigger className="w-fit">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {Array.from(companyNameMap.entries()).map(([key, name]) => (
+                  <SelectItem key={key} value={key}>
+                    {name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <CollapsibleTrigger asChild>
               <Button
                 type="button"
