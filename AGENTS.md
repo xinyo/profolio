@@ -19,5 +19,6 @@
 - prefer use `pnpm` instead of `npm`.
 - Always run `pnpm test` after modifying JavaScript/Typescript files.
 - Use `vitest` for the testing framework.
+- Form component should always have aria to meet WACG requirement.
 
 <!-- - Mock external dependencies like `uuid` in tests. -->
