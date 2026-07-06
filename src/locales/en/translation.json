@@ -51,7 +51,13 @@
         "delete": "Delete"
       },
       "salesOrders": {
-        "title": "Sales Orders"
+        "title": "Sales Orders",
+        "subtitle": "Create and manage customer orders, track payments, and monitor delivery status.",
+        "createOrder": "Create Order",
+        "searchPlaceholder": "Search orders...",
+        "columns": "Columns",
+        "cancel": "Cancel",
+        "save": "Save"
       },
       "customers": {
         "title": "Customers"
