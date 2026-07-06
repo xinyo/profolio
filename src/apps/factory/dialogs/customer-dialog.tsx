@@ -3,31 +3,31 @@ import { useTranslation } from "react-i18next";
 
 import { useFactoryStore, type FactoryCustomer } from "@/apps/factory/store";
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 
 type CustomerDialogProps = {
@@ -36,7 +36,16 @@ type CustomerDialogProps = {
   customerId?: string | null;
 };
 
-const AU_STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"] as const;
+const AU_STATES = [
+  "NSW",
+  "VIC",
+  "QLD",
+  "WA",
+  "SA",
+  "TAS",
+  "ACT",
+  "NT",
+] as const;
 
 const AVATAR_COUNT = 24;
 
@@ -205,17 +214,6 @@ export function CustomerDialog({
 
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="cust-country">
-                {t("factory.views.customers.country")}
-              </Label>
-              <Input
-                id="cust-country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              />
-            </div>
-
-            <div className="grid gap-2">
               <Label htmlFor="cust-name">
                 {t("factory.views.customers.customerName")}
               </Label>
@@ -249,6 +247,17 @@ export function CustomerDialog({
                 placeholder={t("factory.views.customers.abnHint")}
                 value={abn}
                 onChange={(e) => setAbn(e.target.value)}
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="cust-country">
+                {t("factory.views.customers.country")}
+              </Label>
+              <Input
+                id="cust-country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
               />
             </div>
 
@@ -342,4 +351,3 @@ export function CustomerDialog({
     </>
   );
 }
-
