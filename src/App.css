@@ -13,6 +13,11 @@
   }
 }
 
+.profolio-home{
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
+
 #center {
   display: flex;
   flex-direction: column;
@@ -20,15 +25,18 @@
   place-content: center;
   place-items: center;
   flex-grow: 1;
-      margin-top: 6rem;
+  margin-top: 6rem;
 
   & h1 {
     margin: 0;
     font-family: var(--heading);
     font-weight: 500;
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
-    letter-spacing: -0.25rem;
+    font-size: clamp(2.5rem, 6vw, 5.5rem); 
     line-height: 118%;
+  }
+
+  .hero-title {
+    max-width: min(80vw, 800px);
   }
 
   @media (max-width: 1024px) {
@@ -324,7 +332,6 @@
   gap: 56px;
   width: 100%;
   padding: 96px 32px 112px;
-  border-top: 1px solid var(--border);
   box-sizing: border-box;
   text-align: left;
 }

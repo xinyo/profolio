@@ -1,9 +1,9 @@
-import { Link } from "react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
-import { Button } from "@/components/ui/button";
 import designGrid from "@/assets/design-grid.webp";
+import { Button } from "@/components/ui/button";
 
 type GalleryItem = {
   slug: string;
@@ -26,7 +26,7 @@ export function Explore() {
       <div className="explore-header">
         <div className="view-copy">
           <p className="view-kicker">{t("explore.kicker")}</p>
-          <h1>{t("explore.title")}</h1>
+          <h1 className="text-4xl">{t("explore.title")}</h1>
           <p>{t("explore.description")}</p>
         </div>
 
