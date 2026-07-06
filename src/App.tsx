@@ -9,6 +9,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { BrowserRouter, Link, Route, Routes } from "react-router";
 
 import "./App.css";
+import heroImgJump from "./assets/logo-attack.webp";
 import heroImg from "./assets/logo.webp";
 
 type PrincipleItem = {
@@ -23,15 +24,22 @@ function HomePage() {
     returnObjects: true,
   }) as PrincipleItem[];
   const { isDark, setIsDark } = useTheme();
+  const [hovered, setHovered] = useState(false);
 
   return (
     <>
-      <div className="profolio-home flex flex-col items-center justify-center gap-8 max-w-[1440px] mx-auto px-4">
+      <div className="profolio-home flex flex-col items-center justify-center gap-8">
       <section id="center">
         <div className="hero">
-          <img src={heroImg} alt="Hero" className="logo" />
+          <img
+            src={hovered ? heroImgJump : heroImg}
+            alt="Hero"
+            className="logo"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          />
         </div>
-        <div>
+        <div className="hero-title">
           <h1>{t("get_started")}</h1>
           <p>
             <Trans i18nKey="intro"> 
@@ -67,8 +75,6 @@ function HomePage() {
           </Button>
         </div>
       </section>
-
-      <div className="ticks"></div>
 
       <section
         className="principles-section"
