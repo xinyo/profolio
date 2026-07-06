@@ -40,20 +40,80 @@ export type FactoryMaterial = {
   image: string;
 };
 
+export type FactorySalesOrder = {
+  id: string;
+  orderNumber: string;
+  poNumber: string;
+  total: number;
+  createdBy: string;
+  invoiceStatus: string;
+  paymentStatus: string;
+  status: string;
+  contactEmail: string;
+  contactMobile: string;
+  contactPhone: string;
+  invoicedToDate: number;
+  labourActual: number;
+  labourEstimated: number;
+  createdDate: string;
+  toBeInvoiced: number;
+  customerName: string;
+  totalLinkedPoCostExclTax: number;
+  assignedTo: string;
+  billingAddress: string;
+  contactName: string;
+  cost: number;
+  deliveryAddress: string;
+  deliveryFee: number;
+  hoursEstimated: number;
+  hoursWorked: number;
+  installAddress: string;
+  invoicedDate: string;
+  labels: string[];
+  lastModifiedBy: string;
+  lastModifiedDate: string;
+  linkedOrders: string[];
+  margin: number;
+  notes: string;
+  orderType: string;
+  pickUpNotes: string;
+  requiredDate: string;
+  totalExclTax: number;
+};
+
 export const factoryProducts: FactoryProduct[] = mockData.products;
 export const factoryCategories: FactoryCategory[] = mockData.categories;
 export const factoryProductKits: FactoryProductKit[] = mockData.productKits;
 export const factoryMaterials: FactoryMaterial[] = mockData.materials;
+export const factorySalesOrders: FactorySalesOrder[] = mockData.salesOrders;
+
+export type FactoryColumnView = {
+  id: string;
+  name: string;
+  columnVisibility: Record<string, boolean>;
+};
+
+export const defaultSalesOrderColumnViews: FactoryColumnView[] = [
+  {
+    id: "default",
+    name: "All columns",
+    columnVisibility: {},
+  },
+];
 
 type FactoryStore = {
   language: FactoryLanguage;
   timezone: FactoryTimezone;
   isNavPanelOpen: boolean;
   currentCompany: string;
+  salesOrderColumnViews: FactoryColumnView[];
+  activeSalesOrderViewId: string;
   setLanguage: (language: FactoryLanguage) => void;
   setTimezone: (timezone: FactoryTimezone) => void;
   setIsNavPanelOpen: (isOpen: boolean) => void;
   setCurrentCompany: (company: string) => void;
+  setSalesOrderColumnViews: (views: FactoryColumnView[]) => void;
+  setActiveSalesOrderViewId: (id: string) => void;
 };
 
 function getInitialLanguage(): FactoryLanguage {
@@ -79,9 +139,15 @@ export const useFactoryStore = create<FactoryStore>((set) => {
     timezone: getInitialTimezone(),
     isNavPanelOpen: true,
     currentCompany: initialCompany,
+    salesOrderColumnViews: defaultSalesOrderColumnViews,
+    activeSalesOrderViewId: "default",
     setLanguage: (language) => set({ language }),
     setTimezone: (timezone) => set({ timezone }),
     setIsNavPanelOpen: (isNavPanelOpen) => set({ isNavPanelOpen }),
     setCurrentCompany: (currentCompany) => set({ currentCompany }),
+    setSalesOrderColumnViews: (salesOrderColumnViews) =>
+      set({ salesOrderColumnViews }),
+    setActiveSalesOrderViewId: (activeSalesOrderViewId) =>
+      set({ activeSalesOrderViewId }),
   };
 });
