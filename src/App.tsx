@@ -9,7 +9,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { BrowserRouter, Link, Route, Routes } from "react-router";
 
 import "./App.css";
-import heroImgJump from "./assets/logo-attack.webp";
+import heroImgAttack from "./assets/logo-attack.webp";
 import heroImg from "./assets/logo.webp";
 
 type PrincipleItem = {
@@ -32,7 +32,7 @@ function HomePage() {
       <section id="center">
         <div className="hero">
           <img
-            src={hovered ? heroImgJump : heroImg}
+            src={hovered ? heroImgAttack : heroImg}
             alt="Hero"
             className="logo"
             onMouseEnter={() => setHovered(true)}
