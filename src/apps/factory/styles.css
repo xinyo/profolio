@@ -377,7 +377,7 @@
   transition: background-color 160ms ease, border-color 160ms ease;
 }
 
-.factory-customer-item-link:hover {
+div:has(> .factory-customer-item-link:hover) {
   background-color: var(--muted);
 }
 
