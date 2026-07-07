@@ -76,7 +76,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section
+      {/* <section
         className="principles-section"
         aria-labelledby="principles-title"
       >
@@ -92,7 +92,7 @@ function HomePage() {
             </article>
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
     </>
   );
