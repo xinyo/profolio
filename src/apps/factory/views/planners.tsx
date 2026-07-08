@@ -1,6 +1,9 @@
 import type { EventClickArg, EventInput } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin, { Draggable, type DropArg } from "@fullcalendar/interaction";
+import interactionPlugin, {
+  Draggable,
+  type DropArg,
+} from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import {
@@ -145,15 +148,6 @@ export function PlannersView() {
 
   return (
     <section className="factory-view factory-planner-view">
-      <div className="factory-view-header">
-        <div className="factory-view-header-start">
-          <h2>{t("factory.views.planners.title")}</h2>
-          <p className="factory-view-subtitle">
-            {t("factory.views.planners.subtitle")}
-          </p>
-        </div>
-      </div>
-
       <div className="factory-planner-shell">
         <aside
           className="factory-planner-sidebar"
@@ -290,7 +284,10 @@ function PlannerCustomerItem({ customer }: { customer: FactoryCustomer }) {
           {customer.city}, {customer.state}
         </ItemDescription>
       </ItemContent>
-      <GripVertical className="factory-planner-customer-drag-icon" aria-hidden />
+      <GripVertical
+        className="factory-planner-customer-drag-icon"
+        aria-hidden
+      />
     </Item>
   );
 }
