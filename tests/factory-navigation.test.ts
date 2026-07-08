@@ -77,10 +77,6 @@ describe("factory navigation model", () => {
       variant: "back",
     });
     expect(model.sections[0]?.items[0]?.icon).toBe(Undo2);
-    expect(model.sections[1]?.items.map((item) => item.labelKey)).toEqual([
-      "factory.navigation.contextual.workflow.new",
-      "factory.navigation.contextual.workflow.save",
-      "factory.navigation.contextual.workflow.open",
-    ]);
+    expect(model.sections[1]).toBeUndefined();
   });
 });
