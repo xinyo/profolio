@@ -8,8 +8,14 @@ const avatarModules = import.meta.glob("@/assets/avatar/*.svg", {
   import: "default",
 }) as Record<string, string>;
 
+const customerImageModules = import.meta.glob("@/assets/customer/*.webp", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
 function resolveImage(path: string): string {
-  return avatarModules[path] ?? path;
+  return avatarModules[path] ?? customerImageModules[path] ?? path;
 }
 
 export const factoryLanguageOptions = ["English", "Deutsch", "中文"] as const;
@@ -157,12 +163,9 @@ export function filterCustomerContacts(
   }
 
   return activeContacts.filter((contact) =>
-    [
-      contact.contactName,
-      contact.email,
-      contact.phone,
-      contact.mobile,
-    ].some((value) => value.toLowerCase().includes(normalizedQuery)),
+    [contact.contactName, contact.email, contact.phone, contact.mobile].some(
+      (value) => value.toLowerCase().includes(normalizedQuery),
+    ),
   );
 }
 
@@ -265,9 +268,7 @@ export const useFactoryStore = create<FactoryStore>((set) => {
             ? {
                 ...customer,
                 contacts: customer.contacts.map((contact) =>
-                  contact.id === contactId
-                    ? { ...contact, ...data }
-                    : contact,
+                  contact.id === contactId ? { ...contact, ...data } : contact,
                 ),
               }
             : customer,
