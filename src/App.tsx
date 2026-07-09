@@ -5,7 +5,7 @@ import { About } from "@/views/about";
 import { Explore } from "@/views/explore";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { BrowserRouter, Link, Route, Routes } from "react-router";
 
 import "./App.css";
