@@ -259,7 +259,7 @@ function NavSections({ sections }: { sections: NavSection[] }) {
 
         return (
           <NavLink
-            className="factory-nav-item"
+            className="factory-nav-item u-press"
             to={to}
             end={end}
             title={label}

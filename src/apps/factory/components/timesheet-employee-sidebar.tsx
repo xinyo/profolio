@@ -98,7 +98,7 @@ function TimesheetEmployeeItem({
   return (
     <Item
       asChild
-      className="factory-timesheet-employee flex-nowrap"
+      className="factory-timesheet-employee u-press flex-nowrap"
       variant="outline"
       size="sm"
       data-selected={isSelected}

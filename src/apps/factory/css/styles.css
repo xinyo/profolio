@@ -1,4 +1,5 @@
 @import "./shadcn-theme.css";
+@import "./utilities.css";
 
 .factory-app-page {
 
@@ -174,6 +175,7 @@
   text-align: left;
   text-decoration: none;
   cursor: pointer;
+
 }
 
 .factory-nav-item:hover,
@@ -382,6 +384,7 @@
     margin: 0 auto;
   }
 }
+
 
 .factory-customer-item-link {
   display: flex;

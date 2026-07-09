@@ -14,7 +14,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, Route, Routes } from "react-router";
 import logo from "./assets/logo.png";
-import "./styles.css";
+import "./css/styles.css";
 
 import { AiChat } from "@/apps/factory/components/ai-chat";
 import { FactoryNavigations } from "@/apps/factory/components/navigations";
