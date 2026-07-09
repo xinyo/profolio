@@ -1050,6 +1050,18 @@
       "totalExclTax": 10181.82
     }
   ],
+  "locations": [
+    { "id": "loc-1", "name": "Warehouse A" },
+    { "id": "loc-2", "name": "Assembly Bay 2" },
+    { "id": "loc-3", "name": "Finishing Dept" },
+    { "id": "loc-4", "name": "Dispatch Office" },
+    { "id": "loc-5", "name": "CNC Area 1" },
+    { "id": "loc-6", "name": "Raw Materials Store" },
+    { "id": "loc-7", "name": "Admin Building" },
+    { "id": "loc-8", "name": "Assembly Bay 1" },
+    { "id": "loc-9", "name": "Welding Station 2" },
+    { "id": "loc-10", "name": "Quality Lab" }
+  ],
   "timesheets": [
     {
       "id": "ts-1",
@@ -1058,7 +1070,7 @@
       "empId": "emp-1",
       "breakStart": "2026-07-01T12:00:00Z",
       "breakEnd": "2026-07-01T12:30:00Z",
-      "location": "Warehouse A",
+      "location": "loc-1",
       "comments": ["Production line 3 maintenance completed"],
       "status": "Time Approved"
     },
@@ -1069,7 +1081,7 @@
       "empId": "emp-2",
       "breakStart": "2026-07-01T11:30:00Z",
       "breakEnd": "2026-07-01T12:00:00Z",
-      "location": "Assembly Bay 2",
+      "location": "loc-2",
       "comments": ["Shift handover note: check conveyor belt alignment"],
       "status": "Pending"
     },
@@ -1080,7 +1092,7 @@
       "empId": "emp-3",
       "breakStart": "2026-07-02T02:00:00Z",
       "breakEnd": "2026-07-02T02:45:00Z",
-      "location": "Finishing Dept",
+      "location": "loc-3",
       "comments": ["Night shift - quality inspection run"],
       "status": "Pay Approved"
     },
@@ -1091,7 +1103,7 @@
       "empId": "emp-4",
       "breakStart": "2026-07-02T12:30:00Z",
       "breakEnd": "2026-07-02T13:00:00Z",
-      "location": "Dispatch Office",
+      "location": "loc-4",
       "comments": ["Prepared outbound shipments for priority orders", "Signed carrier paperwork"],
       "status": "Time Approved"
     },
@@ -1102,7 +1114,7 @@
       "empId": "emp-5",
       "breakStart": "2026-07-02T11:45:00Z",
       "breakEnd": "2026-07-02T12:15:00Z",
-      "location": "CNC Area 1",
+      "location": "loc-5",
       "comments": ["Retooled CNC-04 for upcoming extrusion job"],
       "status": "Pending"
     },
@@ -1113,7 +1125,7 @@
       "empId": "emp-6",
       "breakStart": "2026-07-02T10:30:00Z",
       "breakEnd": "2026-07-02T11:00:00Z",
-      "location": "Raw Materials Store",
+      "location": "loc-6",
       "comments": ["Inventory count and restock of steel sheets"],
       "status": "Discarded"
     },
@@ -1124,7 +1136,7 @@
       "empId": "emp-7",
       "breakStart": "2026-07-03T12:00:00Z",
       "breakEnd": "2026-07-03T12:45:00Z",
-      "location": "Admin Building",
+      "location": "loc-7",
       "comments": ["Weekly safety audit walkthrough"],
       "status": "Time Approved"
     },
@@ -1135,7 +1147,7 @@
       "empId": "emp-8",
       "breakStart": "2026-07-03T11:30:00Z",
       "breakEnd": "2026-07-03T12:00:00Z",
-      "location": "Assembly Bay 1",
+      "location": "loc-8",
       "comments": [],
       "status": "Pay Approved"
     },
@@ -1146,7 +1158,7 @@
       "empId": "emp-9",
       "breakStart": "2026-07-03T18:00:00Z",
       "breakEnd": "2026-07-03T18:30:00Z",
-      "location": "Welding Station 2",
+      "location": "loc-9",
       "comments": ["Afternoon shift - welded bracket batches for SO-2024-015"],
       "status": "Pending"
     },
@@ -1157,7 +1169,7 @@
       "empId": "emp-10",
       "breakStart": "2026-07-03T12:00:00Z",
       "breakEnd": "2026-07-03T12:30:00Z",
-      "location": "Quality Lab",
+      "location": "loc-10",
       "comments": ["Tested tensile strength on 3 material batches", "Logged results in QMS"],
       "status": "Time Approved"
     }
