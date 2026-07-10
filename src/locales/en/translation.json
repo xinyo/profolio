@@ -182,6 +182,17 @@
       "integrations": {
         "title": "Integrations"
       },
+      "team": {
+        "title": "Team",
+        "subtitle": "Manage your team members and their account details.",
+        "addEmployee": "Add Employee",
+        "editEmployee": "Edit Employee",
+        "searchPlaceholder": "Search team members...",
+        "name": "Name",
+        "email": "Email",
+        "accountType": "Account Type",
+        "empty": "No team members found."
+      },
       "timesheets": {
         "title": "Timesheets",
         "subtitle": "Review employee timesheets by date range, location, and employee.",
@@ -209,7 +220,8 @@
         "products": "Products",
         "sales": "Sales",
         "purchasing": "Purchasing",
-        "productivity": "Productivity"
+        "productivity": "Productivity",
+        "team": "Team"
       },
       "items": {
         "overview": "Overview",
@@ -224,7 +236,8 @@
         "planners": "Planners",
         "deliveryScheduling": "Delivery Scheduling",
         "timesheets": "Timesheets",
-        "integrations": "Integrations"
+        "integrations": "Integrations",
+        "team": "Team"
       },
       "contextual": {
         "customers": {

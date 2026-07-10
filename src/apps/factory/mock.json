@@ -1,5 +1,6 @@
 {
   "user": {
+    "id": "user-1",
     "name": "Avery Morgan",
     "accountType": "Admin",
     "email": "avery@factory.example",

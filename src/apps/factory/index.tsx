@@ -31,6 +31,7 @@ import { ProductCategoriesView } from "@/apps/factory/views/product-categories";
 import { PurchaseOrdersView } from "@/apps/factory/views/purchase-orders";
 import { SalesOrdersView } from "@/apps/factory/views/sales-orders";
 import { SuppliersView } from "@/apps/factory/views/suppliers";
+import { TeamView } from "@/apps/factory/views/team";
 import { TimesheetsView } from "@/apps/factory/views/timesheets";
 import { WorkflowView } from "@/apps/factory/views/workflow";
 import { Button } from "@/components/ui/button";
@@ -257,6 +258,7 @@ export function FactoryApp() {
               />
               <Route path="timesheets" element={<TimesheetsView />} />
               <Route path="integrations" element={<IntegrationsView />} />
+              <Route path="team" element={<TeamView />} />
               <Route
                 path="*"
                 element={<Navigate to="/apps/factory" replace />}

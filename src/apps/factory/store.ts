@@ -109,6 +109,16 @@ export type FactoryEmployee = {
   email: string;
 };
 
+export type FactoryUser = {
+  id: string;
+  name: string;
+  accountType: string;
+  email: string;
+  avatar: string;
+  timezone: string;
+  language: string;
+};
+
 export type FactoryLocation = {
   id: string;
   name: string;
@@ -126,7 +136,11 @@ export type FactoryTimesheet = {
   status: string;
 };
 
-export type FactoryTimesheetStatusVariant = "pending" | "time" | "pay" | "muted";
+export type FactoryTimesheetStatusVariant =
+  | "pending"
+  | "time"
+  | "pay"
+  | "muted";
 
 export type FactoryTimesheetFilters = {
   dateRange: FactoryTimesheetDateRange;
@@ -231,6 +245,15 @@ export const factoryCustomers: FactoryCustomer[] = mockData.customers.map(
   }),
 );
 export const factorySalesOrders: FactorySalesOrder[] = mockData.salesOrders;
+export const factoryUser: FactoryUser = {
+  id: mockData.user.id ?? "user-1",
+  name: mockData.user.name,
+  accountType: mockData.user.accountType,
+  email: mockData.user.email,
+  avatar: resolveAvatarImage(mockData.user.avatar),
+  timezone: mockData.user.timezone,
+  language: mockData.user.language,
+};
 export const factoryEmployees: FactoryEmployee[] = mockData.employees.map(
   (employee) => ({
     ...employee,
@@ -238,6 +261,8 @@ export const factoryEmployees: FactoryEmployee[] = mockData.employees.map(
   }),
 );
 export const factoryLocations: FactoryLocation[] = mockData.locations;
+export const factoryEmployeesById: Record<string, FactoryEmployee> =
+  Object.fromEntries(factoryEmployees.map((e) => [e.id, e]));
 export const factoryTimesheets: FactoryTimesheet[] = mockData.timesheets;
 
 export function createTimesheetIndexes(
@@ -328,7 +353,10 @@ export function filterTimesheets(
       return false;
     }
 
-    if (filters.locationId !== "all" && timesheet.location !== filters.locationId) {
+    if (
+      filters.locationId !== "all" &&
+      timesheet.location !== filters.locationId
+    ) {
       return false;
     }
 
@@ -354,13 +382,14 @@ export function filterTimesheetEmployees(
   const normalizedQuery = filters.employeeQuery.trim().toLowerCase();
   const eligibleEmployeeIds = new Set(
     timesheets
-      .filter((timesheet) =>
-        filterTimesheets([timesheet], {
-          dateRange: filters.dateRange,
-          locationId: filters.locationId,
-          selectedEmployeeId: null,
-          timeZone: filters.timeZone,
-        }).length > 0,
+      .filter(
+        (timesheet) =>
+          filterTimesheets([timesheet], {
+            dateRange: filters.dateRange,
+            locationId: filters.locationId,
+            selectedEmployeeId: null,
+            timeZone: filters.timeZone,
+          }).length > 0,
       )
       .map((timesheet) => timesheet.empId),
   );
@@ -398,6 +427,20 @@ export function filterCustomerContacts(
   return activeContacts.filter((contact) =>
     [contact.contactName, contact.email, contact.phone, contact.mobile].some(
       (value) => value.toLowerCase().includes(normalizedQuery),
+    ),
+  );
+}
+
+export function filterTeamMembers(employees: FactoryEmployee[], query: string) {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery) {
+    return employees;
+  }
+
+  return employees.filter((employee) =>
+    [employee.name, employee.email, employee.accountType].some((value) =>
+      value.toLowerCase().includes(normalizedQuery),
     ),
   );
 }
@@ -531,7 +574,8 @@ export function getAutoGrownWorkflowNodes(
     const requiredWidth = Math.max(
       WORKFLOW_CONTAINER_WIDTH,
       ...children.map(
-        (child) => child.position.x + getNodeWidth(child) + WORKFLOW_CONTAINER_PADDING,
+        (child) =>
+          child.position.x + getNodeWidth(child) + WORKFLOW_CONTAINER_PADDING,
       ),
     );
     const requiredHeight = Math.max(
@@ -596,7 +640,9 @@ type FactoryStore = {
   salesOrderColumnViews: FactoryColumnView[];
   activeSalesOrderViewId: string;
   customers: FactoryCustomer[];
+  user: FactoryUser;
   employees: FactoryEmployee[];
+  employeesById: Record<string, FactoryEmployee>;
   locations: FactoryLocation[];
   timesheets: FactoryTimesheet[];
   timesheetIndexes: FactoryTimesheetIndexes;
@@ -631,6 +677,9 @@ type FactoryStore = {
     data: Partial<FactoryCustomerContact>,
   ) => void;
   archiveCustomerContact: (customerId: string, contactId: string) => void;
+  addEmployee: (employee: FactoryEmployee) => void;
+  updateEmployee: (id: string, data: Partial<FactoryEmployee>) => void;
+  archiveEmployee: (id: string) => void;
   createWorkflow: (name?: string) => string;
   openWorkflow: (id: string) => void;
   saveActiveWorkflow: () => void;
@@ -675,7 +724,9 @@ export const useFactoryStore = create<FactoryStore>((set) => {
     salesOrderColumnViews: defaultSalesOrderColumnViews,
     activeSalesOrderViewId: "default",
     customers: [...factoryCustomers],
+    user: { ...factoryUser },
     employees: [...factoryEmployees],
+    employeesById: { ...factoryEmployeesById },
     locations: [...factoryLocations],
     timesheets: [...factoryTimesheets],
     timesheetIndexes: factoryTimesheetIndexes,
@@ -773,8 +824,7 @@ export const useFactoryStore = create<FactoryStore>((set) => {
           return state;
         }
 
-        const { [id]: _deleted, ...customerBookings } =
-          state.customerBookings;
+        const { [id]: _deleted, ...customerBookings } = state.customerBookings;
         return { customerBookings };
       }),
     addCustomerContact: (customerId, contact) =>
@@ -813,6 +863,35 @@ export const useFactoryStore = create<FactoryStore>((set) => {
             : customer,
         ),
       })),
+    addEmployee: (employee) =>
+      set((state) => ({
+        employees: [...state.employees, employee],
+        employeesById: { ...state.employeesById, [employee.id]: employee },
+      })),
+    updateEmployee: (id, data) =>
+      set((state) => {
+        const updatedEmployees = state.employees.map((emp) =>
+          emp.id === id ? { ...emp, ...data } : emp,
+        );
+        return {
+          employees: updatedEmployees,
+          employeesById: Object.fromEntries(
+            updatedEmployees.map((e) => [e.id, e]),
+          ),
+        };
+      }),
+    archiveEmployee: (id) =>
+      set((state) => {
+        const archivedEmployees = state.employees.filter(
+          (emp) => emp.id !== id,
+        );
+        return {
+          employees: archivedEmployees,
+          employeesById: Object.fromEntries(
+            archivedEmployees.map((e) => [e.id, e]),
+          ),
+        };
+      }),
     createWorkflow: (name) => {
       const id = `workflow-${++workflowIdCounter}`;
       const workflowName = name?.trim() || `Workflow ${workflowIdCounter}`;
@@ -952,7 +1031,9 @@ export const useFactoryStore = create<FactoryStore>((set) => {
             ? {
                 ...workflow,
                 nodes: workflow.nodes.filter(
-                  (node) => !ids.includes(node.id) && !ids.includes(node.parentId ?? ""),
+                  (node) =>
+                    !ids.includes(node.id) &&
+                    !ids.includes(node.parentId ?? ""),
                 ),
                 edges: workflow.edges.filter(
                   (edge) =>
