@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Temporal } from "temporal-polyfill"; // Adjust import based on your package
 
 interface UseFormattedTemporalDateOptions {
@@ -36,7 +36,7 @@ export function useFormattedTemporalDate(
 
   // Auto-update the "now" instant so relative times stay accurate
   useEffect(() => {
-    if (!isoString) return;
+    if (!isoString) return; // isoString example: "2026-01-15T10:30:00Z"
 
     const interval = setInterval(() => {
       setNow(Temporal.Now.instant());

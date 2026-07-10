@@ -187,46 +187,27 @@
     {
       "id": "kit-1",
       "name": "Frame Assembly Kit A",
-      "productIds": [
-        "prod-1",
-        "prod-2",
-        "prod-5"
-      ]
+      "productIds": ["prod-1", "prod-2", "prod-5"]
     },
     {
       "id": "kit-2",
       "name": "Mounting Hardware Set",
-      "productIds": [
-        "prod-6",
-        "prod-5",
-        "prod-8"
-      ]
+      "productIds": ["prod-6", "prod-5", "prod-8"]
     },
     {
       "id": "kit-3",
       "name": "Enclosure Pack",
-      "productIds": [
-        "prod-3",
-        "prod-4",
-        "prod-10"
-      ]
+      "productIds": ["prod-3", "prod-4", "prod-10"]
     },
     {
       "id": "kit-4",
       "name": "Rail System Bundle",
-      "productIds": [
-        "prod-9",
-        "prod-2",
-        "prod-7"
-      ]
+      "productIds": ["prod-9", "prod-2", "prod-7"]
     },
     {
       "id": "kit-5",
       "name": "Gasket Service Kit",
-      "productIds": [
-        "prod-7",
-        "prod-5"
-      ]
+      "productIds": ["prod-7", "prod-5"]
     }
   ],
   "materials": [
@@ -512,15 +493,10 @@
       "hoursWorked": 36,
       "installAddress": "1200 Industrial Pkwy, Chicago, IL 60607",
       "invoicedDate": "2024-02-20",
-      "labels": [
-        "Priority",
-        "Repeat Client"
-      ],
+      "labels": ["Priority", "Repeat Client"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-02-22",
-      "linkedOrders": [
-        "SO-2024-003"
-      ],
+      "linkedOrders": ["SO-2024-003"],
       "margin": 3600.0,
       "notes": "Client requested expedited delivery on frame assemblies.",
       "orderType": "Standard",
@@ -557,9 +533,7 @@
       "hoursWorked": 23,
       "installAddress": "455 Market St, Suite 300, San Francisco, CA 94105",
       "invoicedDate": "2024-02-10",
-      "labels": [
-        "Completed"
-      ],
+      "labels": ["Completed"],
       "lastModifiedBy": "Marcus Webb",
       "lastModifiedDate": "2024-02-12",
       "linkedOrders": [],
@@ -599,15 +573,10 @@
       "hoursWorked": 0,
       "installAddress": "3800 Manufacturing Dr, Detroit, MI 48201",
       "invoicedDate": "",
-      "labels": [
-        "New",
-        "Large Order"
-      ],
+      "labels": ["New", "Large Order"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-02-28",
-      "linkedOrders": [
-        "SO-2024-001"
-      ],
+      "linkedOrders": ["SO-2024-001"],
       "margin": 5500.0,
       "notes": "New expansion project — phase 2.",
       "orderType": "Standard",
@@ -644,10 +613,7 @@
       "hoursWorked": 11,
       "installAddress": "2100 Precision Ct, Columbus, OH 43215",
       "invoicedDate": "2024-01-20",
-      "labels": [
-        "Overdue",
-        "Disputed"
-      ],
+      "labels": ["Overdue", "Disputed"],
       "lastModifiedBy": "Marcus Webb",
       "lastModifiedDate": "2024-03-01",
       "linkedOrders": [],
@@ -687,9 +653,7 @@
       "hoursWorked": 0,
       "installAddress": "5500 Energy Pkwy, Houston, TX 77002",
       "invoicedDate": "",
-      "labels": [
-        "New"
-      ],
+      "labels": ["New"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-03-05",
       "linkedOrders": [],
@@ -729,9 +693,7 @@
       "hoursWorked": 22,
       "installAddress": "88 Foundry Rd, Geelong VIC 3220",
       "invoicedDate": "2024-04-01",
-      "labels": [
-        "Priority"
-      ],
+      "labels": ["Priority"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-04-02",
       "linkedOrders": [],
@@ -771,10 +733,7 @@
       "hoursWorked": 52,
       "installAddress": "17 Steel Lane, Newcastle NSW 2300",
       "invoicedDate": "2024-03-15",
-      "labels": [
-        "Completed",
-        "Repeat Client"
-      ],
+      "labels": ["Completed", "Repeat Client"],
       "lastModifiedBy": "Marcus Webb",
       "lastModifiedDate": "2024-03-16",
       "linkedOrders": [],
@@ -814,10 +773,7 @@
       "hoursWorked": 0,
       "installAddress": "88 Foundry Rd, Geelong VIC 3220",
       "invoicedDate": "",
-      "labels": [
-        "New",
-        "Custom Order"
-      ],
+      "labels": ["New", "Custom Order"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-04-01",
       "linkedOrders": [],
@@ -857,14 +813,10 @@
       "hoursWorked": 9,
       "installAddress": "5500 Energy Pkwy, Houston, TX 77002",
       "invoicedDate": "2024-02-15",
-      "labels": [
-        "Overdue"
-      ],
+      "labels": ["Overdue"],
       "lastModifiedBy": "Marcus Webb",
       "lastModifiedDate": "2024-04-05",
-      "linkedOrders": [
-        "SO-2024-005"
-      ],
+      "linkedOrders": ["SO-2024-005"],
       "margin": 1100.0,
       "notes": "Small connector order — payment overdue since March.",
       "orderType": "Standard",
@@ -901,15 +853,10 @@
       "hoursWorked": 55,
       "installAddress": "455 Market St, Suite 300, San Francisco, CA 94105",
       "invoicedDate": "2024-04-10",
-      "labels": [
-        "Priority",
-        "Large Order"
-      ],
+      "labels": ["Priority", "Large Order"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-04-12",
-      "linkedOrders": [
-        "SO-2024-002"
-      ],
+      "linkedOrders": ["SO-2024-002"],
       "margin": 9000.0,
       "notes": "Phase 2 of TechFab expansion — precision components.",
       "orderType": "Rush",
@@ -946,9 +893,7 @@
       "hoursWorked": 18,
       "installAddress": "2100 Precision Ct, Columbus, OH 43215",
       "invoicedDate": "2024-03-01",
-      "labels": [
-        "Repeat Client"
-      ],
+      "labels": ["Repeat Client"],
       "lastModifiedBy": "Marcus Webb",
       "lastModifiedDate": "2024-03-02",
       "linkedOrders": [],
@@ -988,9 +933,7 @@
       "hoursWorked": 0,
       "installAddress": "17 Steel Lane, Newcastle NSW 2300",
       "invoicedDate": "",
-      "labels": [
-        "New"
-      ],
+      "labels": ["New"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-04-08",
       "linkedOrders": [],
@@ -1030,17 +973,10 @@
       "hoursWorked": 0,
       "installAddress": "5500 Energy Pkwy, Houston, TX 77002",
       "invoicedDate": "",
-      "labels": [
-        "New",
-        "Large Order",
-        "Custom Order"
-      ],
+      "labels": ["New", "Large Order", "Custom Order"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-04-12",
-      "linkedOrders": [
-        "SO-2024-005",
-        "SO-2024-009"
-      ],
+      "linkedOrders": ["SO-2024-005", "SO-2024-009"],
       "margin": 5500.0,
       "notes": "Conveyor system upgrade — full assembly and on-site installation.",
       "orderType": "Custom",
@@ -1077,9 +1013,7 @@
       "hoursWorked": 15,
       "installAddress": "1200 Industrial Pkwy, Chicago, IL 60607",
       "invoicedDate": "2024-03-22",
-      "labels": [
-        "Completed"
-      ],
+      "labels": ["Completed"],
       "lastModifiedBy": "Marcus Webb",
       "lastModifiedDate": "2024-03-22",
       "linkedOrders": [],
@@ -1119,16 +1053,10 @@
       "hoursWorked": 30,
       "installAddress": "2100 Precision Ct, Columbus, OH 43215",
       "invoicedDate": "2024-04-14",
-      "labels": [
-        "Priority",
-        "Repeat Client"
-      ],
+      "labels": ["Priority", "Repeat Client"],
       "lastModifiedBy": "Avery Morgan",
       "lastModifiedDate": "2024-04-15",
-      "linkedOrders": [
-        "SO-2024-011",
-        "SO-2024-004"
-      ],
+      "linkedOrders": ["SO-2024-011", "SO-2024-004"],
       "margin": 3400.0,
       "notes": "Custom tooling fixtures — partial delivery completed.",
       "orderType": "Custom",
@@ -1188,9 +1116,7 @@
       "breakStart": "2026-07-01T12:00:00Z",
       "breakEnd": "2026-07-01T12:30:00Z",
       "location": "loc-1",
-      "comments": [
-        "Production line 3 maintenance completed"
-      ],
+      "comments": ["Production line 3 maintenance completed"],
       "status": "Time Approved"
     },
     {
@@ -1201,9 +1127,7 @@
       "breakStart": "2026-07-01T11:30:00Z",
       "breakEnd": "2026-07-01T12:00:00Z",
       "location": "loc-2",
-      "comments": [
-        "Shift handover note: check conveyor belt alignment"
-      ],
+      "comments": ["Shift handover note: check conveyor belt alignment"],
       "status": "Pending"
     },
     {
@@ -1214,9 +1138,7 @@
       "breakStart": "2026-07-02T02:00:00Z",
       "breakEnd": "2026-07-02T02:45:00Z",
       "location": "loc-3",
-      "comments": [
-        "Night shift - quality inspection run"
-      ],
+      "comments": ["Night shift - quality inspection run"],
       "status": "Pay Approved"
     },
     {
@@ -1241,9 +1163,7 @@
       "breakStart": "2026-07-02T11:45:00Z",
       "breakEnd": "2026-07-02T12:15:00Z",
       "location": "loc-5",
-      "comments": [
-        "Retooled CNC-04 for upcoming extrusion job"
-      ],
+      "comments": ["Retooled CNC-04 for upcoming extrusion job"],
       "status": "Pending"
     },
     {
@@ -1254,9 +1174,7 @@
       "breakStart": "2026-07-02T10:30:00Z",
       "breakEnd": "2026-07-02T11:00:00Z",
       "location": "loc-6",
-      "comments": [
-        "Inventory count and restock of steel sheets"
-      ],
+      "comments": ["Inventory count and restock of steel sheets"],
       "status": "Discarded"
     },
     {
@@ -1267,9 +1185,7 @@
       "breakStart": "2026-07-03T12:00:00Z",
       "breakEnd": "2026-07-03T12:45:00Z",
       "location": "loc-7",
-      "comments": [
-        "Weekly safety audit walkthrough"
-      ],
+      "comments": ["Weekly safety audit walkthrough"],
       "status": "Time Approved"
     },
     {
@@ -1291,9 +1207,7 @@
       "breakStart": "2026-07-03T18:00:00Z",
       "breakEnd": "2026-07-03T18:30:00Z",
       "location": "loc-9",
-      "comments": [
-        "Afternoon shift - welded bracket batches for SO-2024-015"
-      ],
+      "comments": ["Afternoon shift - welded bracket batches for SO-2024-015"],
       "status": "Pending"
     },
     {
@@ -2868,5 +2782,10 @@
       "id": "cat-int-28",
       "name": "Video"
     }
+  ],
+  "integrationsInstalled": [
+    { "id": "int-79" },
+    { "id": "int-60" },
+    { "id": "int-97" }
   ]
 }
