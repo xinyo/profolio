@@ -7,6 +7,7 @@ import {
   useFactoryStore,
   type FactoryEmployee,
 } from "@/apps/factory/store";
+import { resolveFactoryTimeZone } from "@/apps/factory/timesheet-date";
 import { Input } from "@/components/ui/input";
 import {
   Item,
@@ -20,6 +21,7 @@ export function TimesheetEmployeeSidebar() {
   const { t } = useTranslation();
   const employees = useFactoryStore((state) => state.employees);
   const timesheets = useFactoryStore((state) => state.timesheets);
+  const timezone = useFactoryStore((state) => state.timezone);
   const filters = useFactoryStore((state) => state.timesheetFilters);
   const setTimesheetEmployeeQuery = useFactoryStore(
     (state) => state.setTimesheetEmployeeQuery,
@@ -34,6 +36,7 @@ export function TimesheetEmployeeSidebar() {
         dateRange: filters.dateRange,
         locationId: filters.locationId,
         employeeQuery: filters.employeeQuery,
+        timeZone: resolveFactoryTimeZone(timezone),
       }),
     [
       employees,
@@ -41,6 +44,7 @@ export function TimesheetEmployeeSidebar() {
       filters.dateRange,
       filters.locationId,
       filters.employeeQuery,
+      timezone,
     ],
   );
 

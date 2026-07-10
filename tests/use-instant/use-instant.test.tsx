@@ -53,7 +53,7 @@ function renderHook(
     updateIntervalMs?: number;
   },
 ) {
-  let captured: ReturnType<typeof useFormattedTemporalDate> = undefined;
+  let captured = null as ReturnType<typeof useFormattedTemporalDate>;
 
   renderToString(
     <Probe

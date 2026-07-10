@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { Temporal } from "temporal-polyfill";
 
 import {
   factoryEmployees,
@@ -9,10 +10,16 @@ import {
   filterTimesheets,
   getTimesheetStatusVariant,
 } from "@/apps/factory/store";
+import {
+  calendarDateToPlainDate,
+  calendarRangeToTimesheetRange,
+  plainDateToCalendarDate,
+  timesheetRangeToCalendarRange,
+} from "@/apps/factory/timesheet-date";
 
 const allJulyMockDates = {
-  from: new Date("2026-07-01T00:00:00"),
-  to: new Date("2026-07-03T23:59:59"),
+  from: Temporal.PlainDate.from("2026-07-01"),
+  to: Temporal.PlainDate.from("2026-07-03"),
 };
 
 describe("factory timesheets", () => {
@@ -39,15 +46,15 @@ describe("factory timesheets", () => {
   it("filters timesheets by date range", () => {
     const result = filterTimesheets(factoryTimesheets, {
       dateRange: {
-        from: new Date("2026-07-02T00:00:00"),
-        to: new Date("2026-07-02T23:59:59"),
+        from: Temporal.PlainDate.from("2026-07-02"),
+        to: Temporal.PlainDate.from("2026-07-02"),
       },
       locationId: "all",
       selectedEmployeeId: null,
+      timeZone: "UTC",
     });
 
     expect(result.map((timesheet) => timesheet.id)).toEqual([
-      "ts-3",
       "ts-4",
       "ts-5",
       "ts-6",
@@ -59,6 +66,7 @@ describe("factory timesheets", () => {
       dateRange: allJulyMockDates,
       locationId: "loc-2",
       selectedEmployeeId: "emp-2",
+      timeZone: "UTC",
     });
 
     expect(result.map((timesheet) => timesheet.id)).toEqual(["ts-2"]);
@@ -72,6 +80,7 @@ describe("factory timesheets", () => {
         dateRange: allJulyMockDates,
         locationId: "loc-1",
         employeeQuery: "alex",
+        timeZone: "UTC",
       },
     );
 
@@ -84,15 +93,73 @@ describe("factory timesheets", () => {
       factoryTimesheets,
       {
         dateRange: {
-          from: new Date("2026-07-04T00:00:00"),
-          to: new Date("2026-07-04T23:59:59"),
+          from: Temporal.PlainDate.from("2026-07-04"),
+          to: Temporal.PlainDate.from("2026-07-04"),
         },
         locationId: "all",
         employeeQuery: "",
+        timeZone: "UTC",
       },
     );
 
-    expect(result.map((employee) => employee.id)).toEqual(["emp-9"]);
+    expect(result.map((employee) => employee.id)).toEqual([]);
+  });
+
+  it("can filter the same instant into a different day for a configured timezone", () => {
+    const utcResult = filterTimesheets(factoryTimesheets, {
+      dateRange: {
+        from: Temporal.PlainDate.from("2026-07-02"),
+        to: Temporal.PlainDate.from("2026-07-02"),
+      },
+      locationId: "all",
+      selectedEmployeeId: null,
+      timeZone: "UTC",
+    });
+    const sydneyResult = filterTimesheets(factoryTimesheets, {
+      dateRange: {
+        from: Temporal.PlainDate.from("2026-07-02"),
+        to: Temporal.PlainDate.from("2026-07-02"),
+      },
+      locationId: "all",
+      selectedEmployeeId: null,
+      timeZone: "Australia/Sydney",
+    });
+
+    expect(utcResult.map((timesheet) => timesheet.id)).not.toContain("ts-3");
+    expect(sydneyResult.map((timesheet) => timesheet.id)).toContain("ts-3");
+  });
+
+  it("converts shadcn calendar dates to timesheet plain dates", () => {
+    const plainDate = calendarDateToPlainDate(new Date(2026, 6, 2));
+
+    expect(plainDate.toString()).toBe("2026-07-02");
+  });
+
+  it("converts timesheet plain dates to shadcn calendar dates", () => {
+    const calendarDate = plainDateToCalendarDate(
+      Temporal.PlainDate.from("2026-07-02"),
+    );
+
+    expect(calendarDate.getFullYear()).toBe(2026);
+    expect(calendarDate.getMonth()).toBe(6);
+    expect(calendarDate.getDate()).toBe(2);
+  });
+
+  it("converts date ranges across the shadcn calendar boundary", () => {
+    const timesheetRange = calendarRangeToTimesheetRange({
+      from: new Date(2026, 6, 1),
+      to: new Date(2026, 6, 3),
+    });
+    const calendarRange = timesheetRangeToCalendarRange(timesheetRange);
+
+    expect(timesheetRange.from?.toString()).toBe("2026-07-01");
+    expect(timesheetRange.to?.toString()).toBe("2026-07-03");
+    expect(calendarRange?.from?.getFullYear()).toBe(2026);
+    expect(calendarRange?.from?.getMonth()).toBe(6);
+    expect(calendarRange?.from?.getDate()).toBe(1);
+    expect(calendarRange?.to?.getFullYear()).toBe(2026);
+    expect(calendarRange?.to?.getMonth()).toBe(6);
+    expect(calendarRange?.to?.getDate()).toBe(3);
   });
 
   it("maps timesheet statuses to UI variants", () => {

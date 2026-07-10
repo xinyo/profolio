@@ -5,6 +5,7 @@ interface UseFormattedTemporalDateOptions {
   locale?: string | string[];
   relativeTimeStyle?: "long" | "short" | "narrow";
   absoluteFormat?: Intl.DateTimeFormatOptions;
+  timeZone?: string;
   updateIntervalMs?: number;
 }
 
@@ -22,6 +23,7 @@ export function useFormattedTemporalDate(
   const {
     locale = navigator.language,
     relativeTimeStyle = "long",
+    timeZone,
     absoluteFormat = {
       year: "numeric",
       month: "short",
@@ -73,7 +75,10 @@ export function useFormattedTemporalDate(
     });
 
     // Temporal.Instant.toLocaleString is supported by the polyfill
-    const absolute = targetInstant.toLocaleString(locale, absoluteFormat);
+    const absolute = targetInstant.toLocaleString(locale, {
+      ...absoluteFormat,
+      timeZone,
+    });
 
     let relative: string;
 
@@ -116,5 +121,5 @@ export function useFormattedTemporalDate(
       instant: targetInstant,
       isFuture,
     };
-  }, [isoString, now, locale, relativeTimeStyle, absoluteFormat]);
+  }, [isoString, now, locale, relativeTimeStyle, absoluteFormat, timeZone]);
 }

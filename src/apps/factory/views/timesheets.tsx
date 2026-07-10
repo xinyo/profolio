@@ -1,4 +1,3 @@
-import type { DateRange } from "react-day-picker";
 import { CalendarIcon, MapPin } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,6 +8,13 @@ import {
   useFactoryStore,
   type FactoryTimesheet,
 } from "@/apps/factory/store";
+import {
+  calendarRangeToTimesheetRange,
+  getCurrentMonthRange,
+  resolveFactoryTimeZone,
+  timesheetRangeToCalendarRange,
+  type FactoryTimesheetDateRange,
+} from "@/apps/factory/timesheet-date";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -34,33 +40,22 @@ import {
 } from "@/components/ui/select";
 import { useFormattedTemporalDate } from "@/hooks/use-Instant";
 
-function getCurrentLocalMonthRange() {
-  const today = new Date();
-  const from = new Date(today.getFullYear(), today.getMonth(), 1);
-  from.setHours(0, 0, 0, 0);
-
-  const to = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-  to.setHours(23, 59, 59, 999);
-
-  return { from, to };
-}
-
 function formatDateRangeLabel(
-  range: { from: Date | null; to: Date | null },
+  range: FactoryTimesheetDateRange,
   fallback: string,
 ) {
-  const formatter = new Intl.DateTimeFormat(undefined, {
+  const formatOptions = {
     month: "short",
     day: "numeric",
     year: "numeric",
-  });
+  } as const;
 
   if (range.from && range.to) {
-    return `${formatter.format(range.from)} – ${formatter.format(range.to)}`;
+    return `${range.from.toLocaleString(undefined, formatOptions)} – ${range.to.toLocaleString(undefined, formatOptions)}`;
   }
 
   if (range.from) {
-    return formatter.format(range.from);
+    return range.from.toLocaleString(undefined, formatOptions);
   }
 
   return fallback;
@@ -73,6 +68,7 @@ export function TimesheetsView() {
   );
   const locations = useFactoryStore((state) => state.locations);
   const timesheets = useFactoryStore((state) => state.timesheets);
+  const timezone = useFactoryStore((state) => state.timezone);
   const filters = useFactoryStore((state) => state.timesheetFilters);
   const setTimesheetDateRange = useFactoryStore(
     (state) => state.setTimesheetDateRange,
@@ -86,8 +82,18 @@ export function TimesheetsView() {
       return;
     }
 
-    setTimesheetDateRange(getCurrentLocalMonthRange());
-  }, [filters.dateRange.from, filters.dateRange.to, setTimesheetDateRange]);
+    setTimesheetDateRange(getCurrentMonthRange(timezone));
+  }, [
+    filters.dateRange.from,
+    filters.dateRange.to,
+    setTimesheetDateRange,
+    timezone,
+  ]);
+
+  const resolvedTimeZone = useMemo(
+    () => resolveFactoryTimeZone(timezone),
+    [timezone],
+  );
 
   const filteredTimesheets = useMemo(
     () =>
@@ -95,21 +101,18 @@ export function TimesheetsView() {
         dateRange: filters.dateRange,
         locationId: filters.locationId,
         selectedEmployeeId: filters.selectedEmployeeId,
+        timeZone: resolvedTimeZone,
       }),
     [
       timesheets,
       filters.dateRange,
       filters.locationId,
       filters.selectedEmployeeId,
+      resolvedTimeZone,
     ],
   );
 
-  const selectedRange: DateRange | undefined = filters.dateRange.from
-    ? {
-        from: filters.dateRange.from,
-        to: filters.dateRange.to ?? undefined,
-      }
-    : undefined;
+  const selectedRange = timesheetRangeToCalendarRange(filters.dateRange);
 
   return (
     <section className="factory-view factory-timesheets-view">
@@ -141,10 +144,7 @@ export function TimesheetsView() {
               mode="range"
               selected={selectedRange}
               onSelect={(range) =>
-                setTimesheetDateRange({
-                  from: range?.from ?? null,
-                  to: range?.to ?? null,
-                })
+                setTimesheetDateRange(calendarRangeToTimesheetRange(range))
               }
               numberOfMonths={2}
             />
@@ -180,6 +180,7 @@ export function TimesheetsView() {
             <TimesheetItem
               employee={employeesById[timesheet.empId] ?? null}
               timesheet={timesheet}
+              timeZone={resolvedTimeZone}
               key={timesheet.id}
             />
           ))
@@ -196,9 +197,11 @@ export function TimesheetsView() {
 function TimesheetItem({
   employee,
   timesheet,
+  timeZone,
 }: {
   employee: { image: string; name: string } | null;
   timesheet: FactoryTimesheet;
+  timeZone: string;
 }) {
   const { t } = useTranslation();
   const statusVariant = getTimesheetStatusVariant(timesheet.status);
@@ -228,6 +231,7 @@ function TimesheetItem({
         <TimesheetDateTimeBlock
           startTime={timesheet.startTime}
           endTime={timesheet.endTime}
+          timeZone={timeZone}
           dateLabel={t("factory.views.timesheets.dateLabel")}
           timeLabel={t("factory.views.timesheets.timeLabel")}
         />
@@ -239,11 +243,13 @@ function TimesheetItem({
 function TimesheetDateTimeBlock({
   startTime,
   endTime,
+  timeZone,
   dateLabel,
   timeLabel,
 }: {
   startTime: string;
   endTime: string;
+  timeZone: string;
   dateLabel: string;
   timeLabel: string;
 }) {
@@ -253,6 +259,7 @@ function TimesheetDateTimeBlock({
       day: "numeric",
       year: "numeric",
     },
+    timeZone,
     updateIntervalMs: 60000,
   });
   const startTimeFormatted = useFormattedTemporalDate(startTime, {
@@ -260,6 +267,7 @@ function TimesheetDateTimeBlock({
       hour: "numeric",
       minute: "2-digit",
     },
+    timeZone,
     updateIntervalMs: 60000,
   });
   const endTimeFormatted = useFormattedTemporalDate(endTime, {
@@ -267,6 +275,7 @@ function TimesheetDateTimeBlock({
       hour: "numeric",
       minute: "2-digit",
     },
+    timeZone,
     updateIntervalMs: 60000,
   });
 

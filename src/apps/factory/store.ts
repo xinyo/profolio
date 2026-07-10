@@ -2,6 +2,11 @@ import { create } from "zustand";
 import type { Edge, Node, XYPosition } from "@xyflow/react";
 
 import mockData from "@/apps/factory/mock.json";
+import {
+  comparePlainDate,
+  instantToPlainDate,
+  type FactoryTimesheetDateRange,
+} from "@/apps/factory/timesheet-date";
 
 const avatarModules = import.meta.glob("@/assets/avatar/*.svg", {
   eager: true,
@@ -122,11 +127,6 @@ export type FactoryTimesheet = {
 };
 
 export type FactoryTimesheetStatusVariant = "pending" | "time" | "pay" | "muted";
-
-export type FactoryTimesheetDateRange = {
-  from: Date | null;
-  to: Date | null;
-};
 
 export type FactoryTimesheetFilters = {
   dateRange: FactoryTimesheetDateRange;
@@ -276,37 +276,23 @@ export const factoryTimesheetIndexes = createTimesheetIndexes(
   factoryTimesheets,
 );
 
-function getStartOfLocalDay(date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
-
-function getEndOfLocalDay(date: Date) {
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate(),
-    23,
-    59,
-    59,
-    999,
-  );
-}
-
 export function isTimesheetInDateRange(
   timesheet: FactoryTimesheet,
   dateRange: FactoryTimesheetDateRange,
+  timeZone = "UTC",
 ) {
-  const start = new Date(timesheet.startTime).getTime();
-
-  if (!Number.isFinite(start)) {
+  let timesheetDate;
+  try {
+    timesheetDate = instantToPlainDate(timesheet.startTime, timeZone);
+  } catch {
     return false;
   }
 
-  if (dateRange.from && start < getStartOfLocalDay(dateRange.from).getTime()) {
+  if (dateRange.from && comparePlainDate(timesheetDate, dateRange.from) < 0) {
     return false;
   }
 
-  if (dateRange.to && start > getEndOfLocalDay(dateRange.to).getTime()) {
+  if (dateRange.to && comparePlainDate(timesheetDate, dateRange.to) > 0) {
     return false;
   }
 
@@ -333,10 +319,12 @@ export function filterTimesheets(
   filters: Pick<
     FactoryTimesheetFilters,
     "dateRange" | "locationId" | "selectedEmployeeId"
-  >,
+  > & { timeZone?: string },
 ) {
   return timesheets.filter((timesheet) => {
-    if (!isTimesheetInDateRange(timesheet, filters.dateRange)) {
+    if (
+      !isTimesheetInDateRange(timesheet, filters.dateRange, filters.timeZone)
+    ) {
       return false;
     }
 
@@ -358,7 +346,10 @@ export function filterTimesheets(
 export function filterTimesheetEmployees(
   employees: FactoryEmployee[],
   timesheets: FactoryTimesheet[],
-  filters: Pick<FactoryTimesheetFilters, "dateRange" | "locationId" | "employeeQuery">,
+  filters: Pick<
+    FactoryTimesheetFilters,
+    "dateRange" | "locationId" | "employeeQuery"
+  > & { timeZone?: string },
 ) {
   const normalizedQuery = filters.employeeQuery.trim().toLowerCase();
   const eligibleEmployeeIds = new Set(
@@ -368,6 +359,7 @@ export function filterTimesheetEmployees(
           dateRange: filters.dateRange,
           locationId: filters.locationId,
           selectedEmployeeId: null,
+          timeZone: filters.timeZone,
         }).length > 0,
       )
       .map((timesheet) => timesheet.empId),
