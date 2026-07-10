@@ -15,7 +15,7 @@ type FactoryAvatarProps = {
 };
 
 export function FactoryAvatar({ avatar, name }: FactoryAvatarProps) {
-  const avatarSrc = avatarImages[avatar];
+  const avatarSrc = avatarImages[avatar] ?? avatar;
   const fallback = name
     .split(" ")
     .map((part) => part[0])

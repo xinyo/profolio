@@ -34,9 +34,11 @@ function resolveAvatarImage(path: string): string {
 
 export const factoryLanguageOptions = ["English", "Deutsch", "中文"] as const;
 export const factoryTimezoneOptions = ["UTC", "Local"] as const;
+export const factoryAppearanceOptions = ["Light", "Dark", "System"] as const;
 
 export type FactoryLanguage = (typeof factoryLanguageOptions)[number];
 export type FactoryTimezone = (typeof factoryTimezoneOptions)[number];
+export type FactoryAppearance = (typeof factoryAppearanceOptions)[number];
 
 export const companyNameMap = new Map<string, string>([
   ["acme-corp", "Acme Corporation"],
@@ -115,8 +117,17 @@ export type FactoryUser = {
   accountType: string;
   email: string;
   avatar: string;
-  timezone: string;
-  language: string;
+  location: string;
+  timezone: FactoryTimezone;
+  language: FactoryLanguage;
+  appearance: FactoryAppearance;
+  keyboardShortcuts: boolean;
+};
+
+export type FactoryApiKey = {
+  id: string;
+  name: string;
+  maskedKey: string;
 };
 
 export type FactoryLocation = {
@@ -251,9 +262,17 @@ export const factoryUser: FactoryUser = {
   accountType: mockData.user.accountType,
   email: mockData.user.email,
   avatar: resolveAvatarImage(mockData.user.avatar),
-  timezone: mockData.user.timezone,
-  language: mockData.user.language,
+  location: mockData.user.location ?? "loc-7",
+  timezone: getInitialTimezone(),
+  language: getInitialLanguage(),
+  appearance: factoryAppearanceOptions.includes(
+    mockData.user.appearance as FactoryAppearance,
+  )
+    ? (mockData.user.appearance as FactoryAppearance)
+    : "System",
+  keyboardShortcuts: mockData.user.keyboardShortcuts ?? true,
 };
+export const factoryApiKeys: FactoryApiKey[] = mockData.apiKeys;
 export const factoryEmployees: FactoryEmployee[] = mockData.employees.map(
   (employee) => ({
     ...employee,
@@ -661,6 +680,7 @@ type FactoryStore = {
   addCustomer: (customer: FactoryCustomer) => void;
   updateCustomer: (id: string, data: Partial<FactoryCustomer>) => void;
   deleteCustomer: (id: string) => void;
+  updateUserProfile: (data: Partial<FactoryUser>) => void;
   setTimesheetDateRange: (dateRange: FactoryTimesheetDateRange) => void;
   setTimesheetLocationId: (locationId: string) => void;
   setTimesheetSelectedEmployeeId: (employeeId: string | null) => void;
@@ -769,6 +789,16 @@ export const useFactoryStore = create<FactoryStore>((set) => {
           ),
         ),
       })),
+    updateUserProfile: (data) =>
+      set((state) => {
+        const user = { ...state.user, ...data };
+
+        return {
+          user,
+          language: user.language,
+          timezone: user.timezone,
+        };
+      }),
     setTimesheetDateRange: (dateRange) =>
       set((state) => ({
         timesheetFilters: {

@@ -1,5 +1,6 @@
 import { FactoryApp } from "@/apps/factory";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
 import { useTheme } from "@/hooks/use-theme";
 import { About } from "@/views/about";
 import { Explore } from "@/views/explore";
@@ -108,6 +109,7 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/apps/factory/*" element={<FactoryApp />} />
       </Routes>
+      <Toaster />
     </BrowserRouter>
   );
 }

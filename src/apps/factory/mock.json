@@ -4,10 +4,31 @@
     "name": "Avery Morgan",
     "accountType": "Admin",
     "email": "avery@factory.example",
+    "location": "loc-7",
     "timezone": "Local",
     "language": "English",
-    "avatar": "agent_avatar_20.svg"
+    "appearance": "System",
+    "keyboardShortcuts": true,
+    "avatar": "agent_avatar_20.svg",
+    "pin": "1234"
   },
+  "apiKeys": [
+    {
+      "id": "key-production",
+      "name": "Production automation",
+      "maskedKey": "fk_live_************************a91f"
+    },
+    {
+      "id": "key-warehouse",
+      "name": "Warehouse scanner",
+      "maskedKey": "fk_live_************************c42e"
+    },
+    {
+      "id": "key-reporting",
+      "name": "Reporting export",
+      "maskedKey": "fk_test_************************7d20"
+    }
+  ],
   "trial": {
     "badgeLabel": "14-day trial"
   },
