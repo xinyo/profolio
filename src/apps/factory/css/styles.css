@@ -1437,5 +1437,6 @@ div:has(> .factory-customer-item-link:hover) {
 .factory-view__dev-image{
   overflow: hidden;
   border-radius: var(--radius);
-  opacity: 0.8;
+  max-width: 80%;
+  filter: drop-shadow(2px 2px 1px var(--ring));
 }
