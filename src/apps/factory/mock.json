@@ -2694,115 +2694,143 @@
   "integrationCategories": [
     {
       "id": "cat-int-1",
-      "name": "AI"
+      "name": "AI",
+      "group": "AI & Data"
     },
     {
       "id": "cat-int-2",
-      "name": "Accounting & ERP"
+      "name": "Accounting & ERP",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-3",
-      "name": "Analytics"
+      "name": "Analytics",
+      "group": "AI & Data"
     },
     {
       "id": "cat-int-4",
-      "name": "Authentication"
+      "name": "Authentication",
+      "group": "Security & Communication"
     },
     {
       "id": "cat-int-5",
-      "name": "CMS"
+      "name": "CMS",
+      "group": "Developer Platform"
     },
     {
       "id": "cat-int-6",
-      "name": "Commerce"
+      "name": "Commerce",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-7",
-      "name": "DevTools"
+      "name": "DevTools",
+      "group": "Developer Platform"
     },
     {
       "id": "cat-int-8",
-      "name": "Experimentation"
+      "name": "Experimentation",
+      "group": "Developer Platform"
     },
     {
       "id": "cat-int-9",
-      "name": "File Storage"
+      "name": "File Storage",
+      "group": "Infrastructure"
     },
     {
       "id": "cat-int-10",
-      "name": "Flags"
+      "name": "Flags",
+      "group": "Developer Platform"
     },
     {
       "id": "cat-int-11",
-      "name": "HR & People"
+      "name": "HR & People",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-12",
-      "name": "Identity & Security"
+      "name": "Identity & Security",
+      "group": "Security & Communication"
     },
     {
       "id": "cat-int-13",
-      "name": "Industry Specific"
+      "name": "Industry Specific",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-14",
-      "name": "Integration"
+      "name": "Integration",
+      "group": "Developer Platform"
     },
     {
       "id": "cat-int-15",
-      "name": "Logging"
+      "name": "Logging",
+      "group": "Infrastructure"
     },
     {
       "id": "cat-int-16",
-      "name": "Messaging"
+      "name": "Messaging",
+      "group": "Security & Communication"
     },
     {
       "id": "cat-int-17",
-      "name": "Monitoring"
+      "name": "Monitoring",
+      "group": "Infrastructure"
     },
     {
       "id": "cat-int-18",
-      "name": "Observability"
+      "name": "Observability",
+      "group": "Infrastructure"
     },
     {
       "id": "cat-int-19",
-      "name": "POS & Retail"
+      "name": "POS & Retail",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-20",
-      "name": "Payments"
+      "name": "Payments",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-21",
-      "name": "Payroll & Expenses"
+      "name": "Payroll & Expenses",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-22",
-      "name": "Productivity"
+      "name": "Productivity",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-23",
-      "name": "Searching"
+      "name": "Searching",
+      "group": "AI & Data"
     },
     {
       "id": "cat-int-24",
-      "name": "Security"
+      "name": "Security",
+      "group": "Security & Communication"
     },
     {
       "id": "cat-int-25",
-      "name": "Storage"
+      "name": "Storage",
+      "group": "Infrastructure"
     },
     {
       "id": "cat-int-26",
-      "name": "Testing"
+      "name": "Testing",
+      "group": "Developer Platform"
     },
     {
       "id": "cat-int-27",
-      "name": "Time & Scheduling"
+      "name": "Time & Scheduling",
+      "group": "Business & Commerce"
     },
     {
       "id": "cat-int-28",
-      "name": "Video"
+      "name": "Video",
+      "group": "Security & Communication"
     }
   ],
   "integrationsInstalled": [

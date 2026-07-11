@@ -92,6 +92,7 @@ export type FactoryIntegration = {
 export type FactoryIntegrationCategory = {
   id: string;
   name: string;
+  group: string;
 };
 
 export type FactoryCustomer = {

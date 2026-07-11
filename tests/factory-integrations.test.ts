@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 
 import {
   factoryConnectedIntegrationsById,
+  factoryIntegrationCategories,
   factoryIntegrationsById,
   filterFactoryIntegrations,
   useFactoryStore,
@@ -29,6 +30,40 @@ describe("factory integrations", () => {
     expect(state.connectedIntegrationsById["int-79"]).toBe(
       state.integrationsById["int-79"],
     );
+  });
+
+  it("assigns every unique category to one of five non-empty groups", () => {
+    const categoryIds = factoryIntegrationCategories.map(
+      (category) => category.id,
+    );
+    const groups = new Set(
+      factoryIntegrationCategories.map((category) => category.group),
+    );
+
+    expect(factoryIntegrationCategories).toHaveLength(28);
+    expect(new Set(categoryIds).size).toBe(categoryIds.length);
+    expect(
+      factoryIntegrationCategories.every(
+        (category) => category.group.trim().length > 0,
+      ),
+    ).toBe(true);
+    expect(groups).toEqual(
+      new Set([
+        "AI & Data",
+        "Business & Commerce",
+        "Developer Platform",
+        "Infrastructure",
+        "Security & Communication",
+      ]),
+    );
+
+    for (const group of groups) {
+      expect(
+        factoryIntegrationCategories.some(
+          (category) => category.group === group,
+        ),
+      ).toBe(true);
+    }
   });
 
   it("adds a valid integration once and keeps the connected record synchronized", () => {

@@ -1,4 +1,10 @@
-import { EllipsisVertical, Search, Store } from "lucide-react";
+import {
+  ChevronDown,
+  CircleArrowDown,
+  EllipsisVertical,
+  Search,
+  Store,
+} from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,20 +32,36 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 type IntegrationsViewMode = "connected" | "marketplace";
+
+const integrationCategoryGroupOrder = [
+  "AI & Data",
+  "Business & Commerce",
+  "Developer Platform",
+  "Infrastructure",
+  "Security & Communication",
+] as const;
+
+const integrationCategoryGroups = integrationCategoryGroupOrder.map(
+  (group) => ({
+    group,
+    categories: factoryIntegrationCategories.filter(
+      (category) => category.group === group,
+    ),
+  }),
+);
 
 export function IntegrationsView() {
   const { t } = useTranslation();
   const [mode, setMode] = useState<IntegrationsViewMode>("connected");
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("all");
+  const [isCategoryPopoverOpen, setIsCategoryPopoverOpen] = useState(false);
   const integrationsById = useFactoryStore((state) => state.integrationsById);
   const connectedIntegrationsById = useFactoryStore(
     (state) => state.connectedIntegrationsById,
@@ -61,6 +83,9 @@ export function IntegrationsView() {
   }, [categoryId, connectedIntegrationsById, integrationsById, mode, query]);
 
   const hasFilters = query.trim().length > 0 || categoryId !== "all";
+  const selectedCategoryName =
+    factoryIntegrationCategories.find((category) => category.id === categoryId)
+      ?.name ?? t("factory.views.integrations.allCategories");
   const emptyMessage = hasFilters
     ? t("factory.views.integrations.noMatches")
     : t("factory.views.integrations.noConnected");
@@ -80,10 +105,8 @@ export function IntegrationsView() {
             setMode(mode === "marketplace" ? "connected" : "marketplace")
           }
         >
-          {mode !== "marketplace" && <Store className="size-4" />}
-          {mode === "marketplace"
-            ? t("factory.views.integrations.connectedIntegrations")
-            : t("factory.views.integrations.marketplace")}
+          {mode !== "marketplace" ? <Store className="size-4" /> : <CircleArrowDown className="size-4" />}
+          {mode === "marketplace" ? t("factory.views.integrations.connectedIntegrations") : t("factory.views.integrations.marketplace")}
         </Button>
       </div>
 
@@ -99,26 +122,80 @@ export function IntegrationsView() {
               aria-label={t("factory.views.integrations.searchPlaceholder")}
             />
           </div>
-          <Select value={categoryId} onValueChange={setCategoryId}>
-            <SelectTrigger
-              className="w-[220px]"
-              aria-label={t("factory.views.integrations.filterByCategory")}
+          <Popover
+            open={isCategoryPopoverOpen}
+            onOpenChange={setIsCategoryPopoverOpen}
+          >
+            <PopoverTrigger asChild>
+              <Button
+                className="factory-integration-category-trigger"
+                variant="outline"
+                aria-label={t("factory.views.integrations.filterByCategory")}
+              >
+                <span>{selectedCategoryName}</span>
+                <ChevronDown className="size-4" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="factory-integration-category-popover"
+              align="start"
             >
-              <SelectValue
-                placeholder={t("factory.views.integrations.filterByCategory")}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">
-                {t("factory.views.integrations.allCategories")}
-              </SelectItem>
-              {factoryIntegrationCategories.map((category) => (
-                <SelectItem key={category.id} value={category.id}>
-                  {category.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              <div>
+                <Button
+                  className="factory-integration-category-option"
+                  variant="outline"
+                  size="sm"
+                  aria-pressed={categoryId === "all"}
+                  onClick={() => {
+                    setCategoryId("all");
+                    setIsCategoryPopoverOpen(false);
+                  }}
+                >
+                  {t("factory.views.integrations.allCategories")}
+                </Button>
+              </div>
+
+              <div className="factory-integration-category-groups">
+                {integrationCategoryGroups.map(
+                  ({ group, categories }, groupIndex) => (
+                    <section
+                      className="factory-integration-category-group"
+                      key={group}
+                      aria-labelledby={`factory-integration-group-${groupIndex}`}
+                    >
+                      <h3
+                        className="uppercase"
+                        id={`factory-integration-group-${groupIndex}`}
+                      >
+                        {group}
+                      </h3>
+                      <div className="factory-integration-category-options">
+                        {categories.map((category) => {
+                          const isSelected = category.id === categoryId;
+
+                          return (
+                            <Button
+                              className="factory-integration-category-option"
+                              key={category.id}
+                              variant="ghost"
+                              size="xs"
+                              aria-pressed={isSelected}
+                              onClick={() => {
+                                setCategoryId(category.id);
+                                setIsCategoryPopoverOpen(false);
+                              }}
+                            >
+                              {category.name}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    </section>
+                  ),
+                )}
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
 
