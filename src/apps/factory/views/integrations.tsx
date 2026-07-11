@@ -1,9 +1,9 @@
 import {
   ChevronDown,
-  CircleArrowDown,
   EllipsisVertical,
   Search,
   Store,
+  Waypoints,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -105,8 +105,14 @@ export function IntegrationsView() {
             setMode(mode === "marketplace" ? "connected" : "marketplace")
           }
         >
-          {mode !== "marketplace" ? <Store className="size-4" /> : <CircleArrowDown className="size-4" />}
-          {mode === "marketplace" ? t("factory.views.integrations.connectedIntegrations") : t("factory.views.integrations.marketplace")}
+          {mode !== "marketplace" ? (
+            <Store className="size-4" />
+          ) : (
+            <Waypoints className="size-4" />
+          )}
+          {mode === "marketplace"
+            ? t("factory.views.integrations.connectedIntegrations")
+            : t("factory.views.integrations.marketplace")}
         </Button>
       </div>
 
