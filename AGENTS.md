@@ -17,9 +17,11 @@
 # frontend
 
 - prefer use `pnpm` instead of `npm`.
-- Always run `pnpm test` after modifying JavaScript/Typescript files.
+- Always run `pnpm test` after finished modify JavaScript/Typescript files, no confirmation required.
+- text content or label prefer translated.
 - Use `vitest` for the testing framework.
-- Form component should always have aria to meet WACG requirement.
+- Prefer form element / component have aria label to meet WACG requirement.
 - Use javascript Date is forbidden in src and tests. Always use Temporal.
+- large dataset in store prefer indexed by id, prefer Record type or Map, Set, but not array.
 
 <!-- - Mock external dependencies like `uuid` in tests. -->

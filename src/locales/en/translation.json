@@ -180,7 +180,19 @@
         "title": "Delivery Scheduling"
       },
       "integrations": {
-        "title": "Integrations"
+        "title": "Integrations",
+        "subtitle": "Connect the tools your team uses to keep work flowing.",
+        "marketplace": "Marketplace",
+        "connectedIntegrations": "Connected Integrations",
+        "searchPlaceholder": "Search integrations...",
+        "filterByCategory": "Filter by category",
+        "allCategories": "All categories",
+        "connected": "Connected",
+        "connect": "Connect",
+        "disconnect": "Disconnect",
+        "moreOptions": "More options for {{name}}",
+        "noConnected": "No integrations are connected yet. Visit the marketplace to connect one.",
+        "noMatches": "No integrations match your search and category filters."
       },
       "team": {
         "title": "Team",
