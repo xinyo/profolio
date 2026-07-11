@@ -20,6 +20,15 @@ const customerImageModules = import.meta.glob("@/assets/customer/*.webp", {
   import: "default",
 }) as Record<string, string>;
 
+const integrationImageModules = import.meta.glob(
+  "@/assets/integrations/*.webp",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
+
 function resolveImage(path: string): string {
   return avatarModules[path] ?? customerImageModules[path] ?? path;
 }
@@ -70,6 +79,19 @@ export type FactoryMaterial = {
   name: string;
   code: string;
   image: string;
+};
+
+export type FactoryIntegration = {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  image: string;
+};
+
+export type FactoryIntegrationCategory = {
+  id: string;
+  name: string;
 };
 
 export type FactoryCustomer = {
@@ -234,6 +256,45 @@ export const factoryProducts: FactoryProduct[] = mockData.products;
 export const factoryCategories: FactoryCategory[] = mockData.categories;
 export const factoryProductKits: FactoryProductKit[] = mockData.productKits;
 export const factoryMaterials: FactoryMaterial[] = mockData.materials;
+export const factoryIntegrationCategories: FactoryIntegrationCategory[] =
+  mockData.integrationCategories;
+export const factoryIntegrations: FactoryIntegration[] = mockData.integrations.map(
+  (integration) => ({
+    ...integration,
+    image:
+      integrationImageModules[
+        `/src/assets/integrations/${integration.image}`
+      ] ?? integration.image,
+  }),
+);
+export const factoryIntegrationsById: Record<string, FactoryIntegration> =
+  Object.fromEntries(
+    factoryIntegrations.map((integration) => [integration.id, integration]),
+  );
+export const factoryConnectedIntegrationsById: Record<
+  string,
+  FactoryIntegration
+> = Object.fromEntries(
+  mockData.integrationsInstalled.flatMap(({ id }) => {
+    const integration = factoryIntegrationsById[id];
+    return integration ? [[id, integration]] : [];
+  }),
+);
+
+export function filterFactoryIntegrations(
+  integrations: FactoryIntegration[],
+  query: string,
+  categoryId: string,
+): FactoryIntegration[] {
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+
+  return integrations.filter(
+    (integration) =>
+      (categoryId === "all" || integration.category === categoryId) &&
+      (normalizedQuery.length === 0 ||
+        integration.name.toLocaleLowerCase().includes(normalizedQuery)),
+  );
+}
 export const factoryAvatarOptions = Array.from({ length: 24 }, (_, index) => {
   const id = String(index + 1).padStart(2, "0");
   const path = `/src/assets/avatar/agent_avatar_${id}.svg`;
@@ -671,6 +732,8 @@ type FactoryStore = {
   activeWorkflowId: string;
   workflowDraftDirty: boolean;
   selectedWorkflowElementId: string | null;
+  integrationsById: Record<string, FactoryIntegration>;
+  connectedIntegrationsById: Record<string, FactoryIntegration>;
   setLanguage: (language: FactoryLanguage) => void;
   setTimezone: (timezone: FactoryTimezone) => void;
   setIsNavPanelOpen: (isOpen: boolean) => void;
@@ -716,6 +779,8 @@ type FactoryStore = {
   duplicateSelectedWorkflowNode: () => void;
   clearActiveWorkflow: () => void;
   setSelectedWorkflowElementId: (id: string | null) => void;
+  addConnectedIntegration: (id: string) => void;
+  removeConnectedIntegration: (id: string) => void;
 };
 
 function getInitialLanguage(): FactoryLanguage {
@@ -764,6 +829,8 @@ export const useFactoryStore = create<FactoryStore>((set) => {
     activeWorkflowId: defaultWorkflow.id,
     workflowDraftDirty: false,
     selectedWorkflowElementId: null,
+    integrationsById: { ...factoryIntegrationsById },
+    connectedIntegrationsById: { ...factoryConnectedIntegrationsById },
     setLanguage: (language) => set({ language }),
     setTimezone: (timezone) => set({ timezone }),
     setIsNavPanelOpen: (isNavPanelOpen) => set({ isNavPanelOpen }),
@@ -1127,5 +1194,29 @@ export const useFactoryStore = create<FactoryStore>((set) => {
       })),
     setSelectedWorkflowElementId: (selectedWorkflowElementId) =>
       set({ selectedWorkflowElementId }),
+    addConnectedIntegration: (id) =>
+      set((state) => {
+        const integration = state.integrationsById[id];
+        if (!integration || state.connectedIntegrationsById[id]) {
+          return state;
+        }
+
+        return {
+          connectedIntegrationsById: {
+            ...state.connectedIntegrationsById,
+            [id]: integration,
+          },
+        };
+      }),
+    removeConnectedIntegration: (id) =>
+      set((state) => {
+        if (!state.connectedIntegrationsById[id]) {
+          return state;
+        }
+
+        const { [id]: _removed, ...connectedIntegrationsById } =
+          state.connectedIntegrationsById;
+        return { connectedIntegrationsById };
+      }),
   };
 });
