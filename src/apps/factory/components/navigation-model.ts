@@ -137,6 +137,16 @@ export const defaultNavigationSections: NavSection[] = [
       },
     ],
   },
+  {
+    labelKey: "factory.navigation.sections.team",
+    items: [
+      {
+        labelKey: "factory.navigation.items.team",
+        to: "/apps/factory/team",
+        icon: Users,
+      },
+    ],
+  },
 ];
 
 export function getCustomerIdFromPathname(pathname: string) {

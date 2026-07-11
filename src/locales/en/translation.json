@@ -182,6 +182,17 @@
       "integrations": {
         "title": "Integrations"
       },
+      "team": {
+        "title": "Team",
+        "subtitle": "Manage your team members and their account details.",
+        "addEmployee": "Add Employee",
+        "editEmployee": "Edit Employee",
+        "searchPlaceholder": "Search team members...",
+        "name": "Name",
+        "email": "Email",
+        "accountType": "Account Type",
+        "empty": "No team members found."
+      },
       "timesheets": {
         "title": "Timesheets",
         "subtitle": "Review employee timesheets by date range, location, and employee.",
@@ -209,7 +220,8 @@
         "products": "Products",
         "sales": "Sales",
         "purchasing": "Purchasing",
-        "productivity": "Productivity"
+        "productivity": "Productivity",
+        "team": "Team"
       },
       "items": {
         "overview": "Overview",
@@ -224,7 +236,8 @@
         "planners": "Planners",
         "deliveryScheduling": "Delivery Scheduling",
         "timesheets": "Timesheets",
-        "integrations": "Integrations"
+        "integrations": "Integrations",
+        "team": "Team"
       },
       "contextual": {
         "customers": {
@@ -277,6 +290,93 @@
         "keyboardShortcuts": "Keyboard Shortcuts",
         "upgrade": "Upgrade",
         "logout": "Logout"
+      }
+    },
+    "profileDialog": {
+      "title": "Profile settings",
+      "description": "Manage your account, security, notifications, and API keys.",
+      "tabs": {
+        "label": "Profile sections",
+        "account": "Account",
+        "security": "Security",
+        "notifications": "Notifications",
+        "apiKeys": "API keys"
+      },
+      "avatar": {
+        "title": "Choose avatar",
+        "subtitle": "Pick the avatar your teammates see across the workspace.",
+        "save": "Save avatar",
+        "selectLabel": "Select profile avatar",
+        "optionPrefix": "Avatar option"
+      },
+      "account": {
+        "title": "Account",
+        "subtitle": "Update the profile and workspace preferences used by Factory.",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "location": "Location",
+        "language": "Language",
+        "timezone": "Timezone",
+        "appearance": "Appearance",
+        "keyboardShortcuts": "Keyboard shortcuts",
+        "keyboardShortcutsDesc": "Enable workspace shortcuts such as command search.",
+        "update": "Update account",
+        "delete": "Delete account"
+      },
+      "security": {
+        "title": "Security",
+        "subtitle": "Manage login protection, recovery access, and sign-in methods.",
+        "twoFactorAuth": "Two-factor authentication",
+        "twoFactorAuthDesc": "Add a second verification step to protect your account.",
+        "configure": "Configure",
+        "backupCodes": "Backup codes",
+        "backupCodesDesc": "Generate one-time recovery codes for emergency access.",
+        "generate": "Generate",
+        "password": "Password",
+        "updatePassword": "Update password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "repeatPassword": "Repeat new password",
+        "signInMethods": "Sign in methods",
+        "google": "Google",
+        "googleDesc": "Sign in with your Google account.",
+        "apple": "Apple",
+        "appleDesc": "Sign in with your Apple account.",
+        "connect": "Connect"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Choose what should interrupt you and what can wait.",
+        "email": "Email notifications",
+        "emailDesc": "Receive important factory workspace updates by email.",
+        "securityAlerts": "Security alerts",
+        "securityAlertsDesc": "Get notified about sign-in and permission changes.",
+        "workflowChanges": "Workflow changes",
+        "workflowChangesDesc": "Notify me when production workflows are updated.",
+        "weeklySummaries": "Weekly summaries",
+        "weeklySummariesDesc": "Send a compact digest of activity and open work.",
+        "productUpdates": "Product updates",
+        "productUpdatesDesc": "Show release notes and new feature announcements."
+      },
+      "apiKeys": {
+        "title": "API keys",
+        "subtitle": "Generate mock keys for local integrations and automation tests.",
+        "activeKeys": "Active keys",
+        "activeKeysDesc": "Generated keys are only shown once, then masked.",
+        "generateKey": "Generate key",
+        "newKeyTitle": "New API key",
+        "newKeyDesc": "Name this key before generating it.",
+        "keyName": "Key name",
+        "generate": "Generate",
+        "copyKey": "Copy this key now",
+        "deleteKey": "Delete {{name}} key"
+      },
+      "actions": {
+        "profileSaved": "Profile saved",
+        "avatarSaved": "Avatar saved",
+        "passwordSaved": "Password saved",
+        "apiKeyCopied": "API key copied"
       }
     }
   },

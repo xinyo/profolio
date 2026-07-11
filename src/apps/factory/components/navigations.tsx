@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import {
   CalendarClock,
   CreditCard,
@@ -21,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { CollapsibleContent } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { SearchDialog } from "@/apps/factory/components/search-dialog";
+import { ProfileDialog } from "@/apps/factory/components/profile-dialog";
 import { useTheme } from "@/hooks/use-theme";
 import {
   DropdownMenu,
@@ -56,11 +58,13 @@ import {
 export function FactoryNavigations() {
   const { t } = useTranslation();
   const location = useLocation();
-  const { user, trial } = mockData;
+  const { trial } = mockData;
   const { setIsDark } = useTheme(false);
   const leftPanelModel = getFactoryLeftPanelModel(location.pathname);
+  const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
 
   const isNavPanelOpen = useFactoryStore((state) => state.isNavPanelOpen);
+  const user = useFactoryStore((state) => state.user);
   const language = useFactoryStore((state) => state.language);
   const timezone = useFactoryStore((state) => state.timezone);
   const setLanguage = useFactoryStore((state) => state.setLanguage);
@@ -129,7 +133,7 @@ export function FactoryNavigations() {
             align="start"
             sideOffset={8}
           >
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => setIsProfileDialogOpen(true)}>
               <User />
               {t("factory.account.menu.profile")}
             </DropdownMenuItem>
@@ -236,6 +240,10 @@ export function FactoryNavigations() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <ProfileDialog
+          open={isProfileDialogOpen}
+          onOpenChange={setIsProfileDialogOpen}
+        />
       </footer>
     </>
   );

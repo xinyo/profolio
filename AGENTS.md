@@ -1,6 +1,6 @@
 # principle
 
-- When the `#plan` command is triggered, ask for confirmation before executing.
+- When the `#plan` command is triggered, always ask if anything is not clear/missing, DO NOT make assumption.
 - Ask for confirmation before adding new production dependencies.
 
 - PR must include a changes summary in the description.
