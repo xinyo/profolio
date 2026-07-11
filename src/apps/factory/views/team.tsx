@@ -1,4 +1,4 @@
-import { EllipsisVertical, Mail, Plus, Search, Shield } from "lucide-react";
+import { EllipsisVertical, Mail, Plus, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -174,7 +174,6 @@ function TeamMemberItem({
         </ItemTitle>
         <ItemDescription>
           <span className="inline-flex items-center gap-2">
-            <Shield className="size-4" />
             {member.accountType}
           </span>
         </ItemDescription>
