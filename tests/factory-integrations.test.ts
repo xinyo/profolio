@@ -26,6 +26,7 @@ describe("factory integrations", () => {
       "int-79",
       "int-60",
       "int-97",
+      "int-new-24",
     ]);
     expect(state.connectedIntegrationsById["int-79"]).toBe(
       state.integrationsById["int-79"],
@@ -73,7 +74,7 @@ describe("factory integrations", () => {
     store.addConnectedIntegration("int-1");
 
     const state = useFactoryStore.getState();
-    expect(Object.keys(state.connectedIntegrationsById)).toHaveLength(4);
+    expect(Object.keys(state.connectedIntegrationsById)).toHaveLength(5);
     expect(state.connectedIntegrationsById["int-1"]).toBe(
       state.integrationsById["int-1"],
     );
@@ -86,7 +87,7 @@ describe("factory integrations", () => {
     store.removeConnectedIntegration("int-79");
 
     const state = useFactoryStore.getState();
-    expect(Object.keys(state.connectedIntegrationsById)).toHaveLength(2);
+    expect(Object.keys(state.connectedIntegrationsById)).toHaveLength(3);
     expect(state.connectedIntegrationsById["int-79"]).toBeUndefined();
     expect(state.integrationsById["int-79"]).toBeDefined();
   });
