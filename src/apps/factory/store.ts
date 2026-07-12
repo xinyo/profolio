@@ -130,6 +130,39 @@ export type FactoryCustomerBooking = {
   end: string;
 };
 
+export type FactorySupplierPurchaseHistory = {
+  id: string;
+  createdDate: string;
+  createdBy: string;
+  totalCost: number;
+  status: "draft" | "submitted" | "Received" | "billed" | "archived";
+};
+
+export type FactorySupplierContact = {
+  id: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  mobile: string;
+  avatar: string;
+  archived: boolean;
+};
+
+export type FactorySupplier = {
+  id: string;
+  name: string;
+  country: string;
+  abn: string;
+  address: string;
+  city: string;
+  postCode: string;
+  state: string;
+  image: string;
+  contacts: FactorySupplierContact[];
+  purchaseHistory: FactorySupplierPurchaseHistory[];
+  suppliedProducts: string[];
+};
+
 export type FactoryEmployee = {
   id: string;
   image: string;
@@ -321,6 +354,18 @@ export const factoryCustomers: FactoryCustomer[] = mockData.customers.map(
     })),
   }),
 );
+export const factorySuppliers: FactorySupplier[] = mockData.suppliers.map(
+  (s) => ({
+    ...s,
+    image: resolveImage(s.image),
+    contacts: s.contacts.map((contact) => ({
+      ...contact,
+      avatar: resolveImage(contact.avatar),
+    })),
+  }),
+);
+export const factorySuppliersById: Record<string, FactorySupplier> =
+  Object.fromEntries(factorySuppliers.map((s) => [s.id, s]));
 export const factorySalesOrders: FactorySalesOrder[] = mockData.salesOrders;
 export const factoryUser: FactoryUser = {
   id: mockData.user.id ?? "user-1",
