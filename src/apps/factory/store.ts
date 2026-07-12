@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { Edge, Node, XYPosition } from "@xyflow/react";
 
+import i18n from "@/i18n";
 import mockData from "@/apps/factory/mock.json";
 import {
   FACTORY_CUSTOM_COMPANY_ID,
@@ -52,6 +53,20 @@ export const factoryAppearanceOptions = ["Light", "Dark", "System"] as const;
 export type FactoryLanguage = (typeof factoryLanguageOptions)[number];
 export type FactoryTimezone = (typeof factoryTimezoneOptions)[number];
 export type FactoryAppearance = (typeof factoryAppearanceOptions)[number];
+
+/** Maps display language names to i18n language codes. */
+export const factoryLanguageToCode: Record<FactoryLanguage, string> = {
+  English: "en",
+  Deutsch: "de",
+  "中文": "zh",
+};
+
+/** Maps display language names to their i18n translation label keys. */
+export const factoryLanguageLabelKeys: Record<FactoryLanguage, string> = {
+  English: "factory.account.menu.english",
+  Deutsch: "factory.account.menu.deutsch",
+  "中文": "factory.account.menu.chinese",
+};
 
 export const companyNameMap = new Map<string, string>([
   ["acme-corp", "Acme Corporation"],
@@ -942,7 +957,10 @@ export const useFactoryStore = create<FactoryStore>((set) => {
     productKits: [...factoryProductKits],
     categories: [...factoryCategories],
     materials: [...factoryMaterials],
-    setLanguage: (language) => set({ language }),
+    setLanguage: (language) => {
+      set({ language });
+      void i18n.changeLanguage(factoryLanguageToCode[language]);
+    },
     setTimezone: (timezone) => set({ timezone }),
     setIsNavPanelOpen: (isNavPanelOpen) => set({ isNavPanelOpen }),
     setCurrentCompany: (currentCompany) => set({ currentCompany }),
