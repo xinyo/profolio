@@ -20,11 +20,11 @@
     "title": "Factory",
     "welcome": {
       "eyebrow": "Welcome to Factory",
-      "title": "Set up your workspace",
-      "description": "Tell us who you are and where your team works.",
+      "title": "Modernise your workshop",
+      "description": "Let's get started by creating your workspace.",
       "firstName": "First name",
       "lastName": "Last name",
-      "companyName": "Company name",
+      "companyName": "Business name",
       "submit": "Create workspace",
       "loading": {
         "logoAlt": "Factory",

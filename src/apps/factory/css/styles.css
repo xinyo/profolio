@@ -878,7 +878,20 @@ div:has(> .factory-customer-item-link:hover) {
   gap: 0.625rem;
 }
 
-.factory-welcome-heading p {
+.factory-welcome-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  justify-content: center;
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+}
+
+.factory-welcome-eyebrow-row p {
   margin: 0;
   color: var(--primary);
   font-size: 0.75rem;
@@ -888,11 +901,6 @@ div:has(> .factory-customer-item-link:hover) {
 }
 
 .factory-welcome-heading h1 {
-  margin: 0;
-  color: var(--foreground);
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
   line-height: 1.05;
 }
 
@@ -919,7 +927,7 @@ div:has(> .factory-customer-item-link:hover) {
   min-height: 100dvh;
   padding: clamp(2rem, 7vw, 7rem);
   overflow: hidden;
-  background: var(--dark-bg);
+  background: var(--card-foreground);
 }
 
 .factory-welcome-art img {

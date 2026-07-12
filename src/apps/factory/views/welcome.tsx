@@ -2,7 +2,6 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import devImage from "@/assets/dev.webp";
 import factoryLogo from "@/apps/factory/assets/logo.png";
 import {
   FACTORY_LOADING_DURATION_MS,
@@ -17,7 +16,12 @@ import {
 } from "@/apps/factory/onboarding";
 import { useFactoryStore } from "@/apps/factory/store";
 import { Button } from "@/components/ui/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 
@@ -41,9 +45,7 @@ export function WelcomeView() {
     }
 
     const progressInterval = window.setInterval(() => {
-      setLoadingTick((tick) =>
-        Math.min(tick + 1, FACTORY_LOADING_TOTAL_TICKS),
-      );
+      setLoadingTick((tick) => Math.min(tick + 1, FACTORY_LOADING_TOTAL_TICKS));
     }, FACTORY_LOADING_TICK_MS);
     const navigationTimeout = window.setTimeout(() => {
       setLoadingTick(FACTORY_LOADING_TOTAL_TICKS);
@@ -92,11 +94,12 @@ export function WelcomeView() {
   if (isLoading) {
     return (
       <main className="factory-app-page factory-welcome-loading-page">
-        <div className="factory-welcome-loading" role="status" aria-live="polite">
-          <img
-            src={factoryLogo}
-            alt={t("factory.welcome.loading.logoAlt")}
-          />
+        <div
+          className="factory-welcome-loading"
+          role="status"
+          aria-live="polite"
+        >
+          <img src={factoryLogo} alt={t("factory.welcome.loading.logoAlt")} />
           <Progress
             value={loadingProgress}
             aria-label={t("factory.welcome.loading.progressLabel")}
@@ -110,14 +113,21 @@ export function WelcomeView() {
   return (
     <main className="factory-app-page factory-welcome-page">
       <section className="factory-welcome-form-panel">
-        <form className="factory-welcome-form" onSubmit={handleSubmit} noValidate>
+        <form
+          className="factory-welcome-form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <div className="factory-welcome-heading">
-            <p>{t("factory.welcome.eyebrow")}</p>
+            <div className="factory-welcome-eyebrow-row">
+              <img src={factoryLogo} alt="Factory Logo" />
+              <p>{t("factory.welcome.eyebrow")}</p>
+            </div>
             <h1>{t("factory.welcome.title")}</h1>
-            <span>{t("factory.welcome.description")}</span>
+            {/* <span>{t("factory.welcome.description")}</span> */}
           </div>
 
-          <FieldGroup>
+          <FieldGroup className="text-left">
             <Field>
               <FieldLabel htmlFor="factory-welcome-first-name">
                 {t("factory.welcome.firstName")}
@@ -129,7 +139,9 @@ export function WelcomeView() {
                 value={firstName}
                 required
                 aria-invalid={Boolean(errors.firstName)}
-                aria-describedby={errors.firstName ? "first-name-error" : undefined}
+                aria-describedby={
+                  errors.firstName ? "first-name-error" : undefined
+                }
                 onChange={(event) => setFirstName(event.target.value)}
               />
               {errors.firstName && (
@@ -150,7 +162,9 @@ export function WelcomeView() {
                 value={lastName}
                 required
                 aria-invalid={Boolean(errors.lastName)}
-                aria-describedby={errors.lastName ? "last-name-error" : undefined}
+                aria-describedby={
+                  errors.lastName ? "last-name-error" : undefined
+                }
                 onChange={(event) => setLastName(event.target.value)}
               />
               {errors.lastName && (
@@ -171,7 +185,9 @@ export function WelcomeView() {
                 value={companyName}
                 required
                 aria-invalid={Boolean(errors.companyName)}
-                aria-describedby={errors.companyName ? "company-name-error" : undefined}
+                aria-describedby={
+                  errors.companyName ? "company-name-error" : undefined
+                }
                 onChange={(event) => setCompanyName(event.target.value)}
               />
               {errors.companyName && (
@@ -193,9 +209,7 @@ export function WelcomeView() {
         </form>
       </section>
 
-      <aside className="factory-welcome-art" aria-hidden="true">
-        <img src={devImage} alt="" />
-      </aside>
+      <aside className="factory-welcome-art" aria-hidden="true"></aside>
     </main>
   );
 }
