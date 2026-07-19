@@ -265,7 +265,7 @@
         "openWorkflow": "Open workflow",
         "saveWorkflow": "Workflow Saved",
         "unsaved": "Unsaved workflow changes",
-        "unsavedShort": "Unsaved",
+        "unsavedShort": "Save Workflow",
         "nodeTools": "Nodes",
         "canvasTools": "Canvas",
         "addContainer": "Add container",

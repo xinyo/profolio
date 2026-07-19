@@ -265,7 +265,7 @@
         "openWorkflow": "Workflow öffnen",
         "saveWorkflow": "Workflow gespeichert",
         "unsaved": "Ungespeicherte Workflow-Änderungen",
-        "unsavedShort": "Ungespeichert",
+        "unsavedShort": "Speichern Workflow",
         "nodeTools": "Knoten",
         "canvasTools": "Canvas",
         "addContainer": "Container hinzufügen",
