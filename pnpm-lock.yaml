@@ -95,6 +95,9 @@ importers:
       temporal-polyfill:
         specifier: ^1.0.1
         version: 1.0.1
+      transition-style:
+        specifier: ^0.1.4
+        version: 0.1.4
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
@@ -3008,6 +3011,9 @@ packages:
   toidentifier@1.0.1:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
+
+  transition-style@0.1.4:
+    resolution: {integrity: sha512-7p1wlhfJA8VWZDYPKbodVuloPv3E11RODEzBcwFfMYbgXuhM5iXgojbXWZ6fVOV0HScIJvnQA4HEAYoxzbJnmg==}
 
   ts-morph@26.0.0:
     resolution: {integrity: sha512-ztMO++owQnz8c/gIENcM9XfCEzgoGphTv+nKpYNM1bgsdOVC/jRZuEBf6N+mLLDNg68Kl+GgUZfOySaRiG1/Ug==}
@@ -6097,6 +6103,8 @@ snapshots:
       is-number: 7.0.0
 
   toidentifier@1.0.1: {}
+
+  transition-style@0.1.4: {}
 
   ts-morph@26.0.0:
     dependencies:

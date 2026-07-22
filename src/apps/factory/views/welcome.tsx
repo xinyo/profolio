@@ -209,7 +209,11 @@ export function WelcomeView() {
         </form>
       </section>
 
-      <aside className="factory-welcome-art" aria-hidden="true"></aside>
+      <aside
+        className="factory-welcome-art"
+        aria-hidden="true"
+        transition-style="in:circle:bottom-right"
+      ></aside>
     </main>
   );
 }

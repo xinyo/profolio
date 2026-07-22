@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/ibm-plex-sans";
 @import "@fontsource-variable/nunito-sans";
+@import "transition-style";
 
 @custom-variant dark (&:is(.dark *));
 

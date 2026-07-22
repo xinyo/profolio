@@ -89,7 +89,10 @@ function HomePage() {
 
   return (
     <>
-      <div className="portfolio-home flex flex-col items-center justify-center gap-8">
+      <div
+        className="portfolio-home flex flex-col items-center justify-center gap-8"
+        transition-style="in:wipe:left"
+      >
         <header className="home-header">
           <div className="hero">
             <img
@@ -126,13 +129,9 @@ function HomePage() {
           </div>
 
           <div className="button-group">
-            <Button
-              asChild
-              size="lg"
-              onClick={() => setCount((count) => count + 1)}
-            >
+            <Button asChild size="lg">
               <Link to="/about">
-                {t("hero_primary_btn", { count })}
+                {t("hero_primary_btn")}
                 <ArrowRight />
               </Link>
             </Button>

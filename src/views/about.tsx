@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export function About() {
   return (
-    <main className="view-page">
+    <main className="view-page" transition-style="in:wipe:right">
       <div className="view-copy">
         <p className="view-kicker">About</p>
         <h1>Design-minded engineering for focused products.</h1>

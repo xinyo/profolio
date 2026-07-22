@@ -22,7 +22,7 @@ export function Explore() {
   }) as GalleryItem[];
 
   return (
-    <main className="explore-page">
+    <main className="explore-page" transition-style="in:wipe:right">
       <div className="explore-header">
         <div className="view-copy">
           <p className="view-kicker">{t("explore.kicker")}</p>
