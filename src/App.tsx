@@ -12,6 +12,10 @@ const FactoryApp = lazy(() =>
   import("@/apps/factory").then((m) => ({ default: m.FactoryApp })),
 );
 
+const JellyoctoApp = lazy(() =>
+  import("@/apps/jellyocto").then((m) => ({ default: m.JellyoctoApp })),
+);
+
 import "./App.css";
 import heroImgAttack from "./assets/logo-attack.webp";
 import heroImg from "./assets/logo.webp";
@@ -23,7 +27,6 @@ type PrincipleItem = {
 
 function HomePage() {
   const { t } = useTranslation();
-  const [count, setCount] = useState(0);
   const principles = t("operating_principles.items", {
     returnObjects: true,
   }) as PrincipleItem[];
@@ -179,6 +182,14 @@ function App() {
           element={
             <Suspense fallback={null}>
               <FactoryApp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/apps/jellyocto/*"
+          element={
+            <Suspense fallback={null}>
+              <JellyoctoApp />
             </Suspense>
           }
         />
