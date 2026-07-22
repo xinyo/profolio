@@ -93,7 +93,10 @@ export function WelcomeView() {
 
   if (isLoading) {
     return (
-      <main className="factory-app-page factory-welcome-loading-page">
+      <main
+        className="factory-app-page factory-welcome-loading-page"
+        transition-style="in:circle:bottom-right"
+      >
         <div
           className="factory-welcome-loading"
           role="status"
@@ -112,7 +115,10 @@ export function WelcomeView() {
 
   return (
     <main className="factory-app-page factory-welcome-page">
-      <section className="factory-welcome-form-panel">
+      <section
+        className="factory-welcome-form-panel"
+        transition-style="in:circle:bottom-right"
+      >
         <form
           className="factory-welcome-form"
           onSubmit={handleSubmit}
@@ -209,11 +215,7 @@ export function WelcomeView() {
         </form>
       </section>
 
-      <aside
-        className="factory-welcome-art"
-        aria-hidden="true"
-        transition-style="in:circle:bottom-right"
-      ></aside>
+      <aside className="factory-welcome-art" aria-hidden="true"></aside>
     </main>
   );
 }
