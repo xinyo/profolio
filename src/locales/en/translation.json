@@ -8,13 +8,11 @@
     "title": "Concepts, systems, and product experiments.",
     "description": "A space for collected ideas, interface studies, and engineering notes that connect strategy, usability, and implementation detail.",
     "home": "Home",
-    "gallery": [
-      {
-        "slug": "factory",
-        "title": "Factory.app",
-        "subtitle": "Online tools for fabricators to create orders, collaborate on work, schedule jobs and track time from one location."
-      }
-    ]
+    "collectionLabel": "Work collection",
+    "revealProject": "Reveal {{title}} cover",
+    "openProject": "Open {{title}} in a new tab",
+    "previewOnly": "Concept preview",
+    "open": "Open project"
   },
   "factory": {
     "title": "Factory",

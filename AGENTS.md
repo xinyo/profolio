@@ -12,7 +12,7 @@
 
 - Each app in apps folder is an independent, self-contained unit.
 - CSS styles must be strictly scoped to their parent app.
-- Before writing or modifying any app, READ its corresponding design.md to understand its boundaries
+- When making plan for a certain App with UI changes, READ its corresponding design.md to understand its boundaries.
 
 # frontend
 

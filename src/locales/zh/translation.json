@@ -8,13 +8,11 @@
     "title": "概念、系统和产品实验。",
     "description": "汇集创意、界面研究和工程笔记的空间，连接策略、可用性与实现细节。",
     "home": "首页",
-    "gallery": [
-      {
-        "slug": "factory",
-        "title": "Factory.app",
-        "subtitle": "面向制造商的在线工具，可在一个平台上创建订单、协作工作、安排任务和跟踪时间。"
-      }
-    ]
+    "collectionLabel": "作品集",
+    "revealProject": "显示 {{title}} 封面",
+    "openProject": "在新标签页中打开 {{title}}",
+    "previewOnly": "概念预览",
+    "open": "打开项目"
   },
   "factory": {
     "title": "Factory",

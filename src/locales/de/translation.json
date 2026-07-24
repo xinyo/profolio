@@ -8,13 +8,11 @@
     "title": "Konzepte, Systeme und Produktexperimente.",
     "description": "Ein Raum für gesammelte Ideen, Oberflächenstudien und technische Notizen, die Strategie, Benutzerfreundlichkeit und Implementierungsdetails verbinden.",
     "home": "Startseite",
-    "gallery": [
-      {
-        "slug": "factory",
-        "title": "Factory.app",
-        "subtitle": "Online-Werkzeuge für Fertigungsbetriebe zur Erstellung von Aufträgen, Zusammenarbeit an Projekten, Terminplanung und Zeiterfassung an einem Ort."
-      }
-    ]
+    "collectionLabel": "Projektsammlung",
+    "revealProject": "Cover von {{title}} anzeigen",
+    "openProject": "{{title}} in einem neuen Tab öffnen",
+    "previewOnly": "Konzeptvorschau",
+    "open": "Projekt öffnen"
   },
   "factory": {
     "title": "Factory",
